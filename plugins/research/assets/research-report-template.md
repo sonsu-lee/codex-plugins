@@ -25,6 +25,19 @@ Confidence: <high | medium | low>
 | --- | --- | --- | --- | --- | --- | --- | --- |
 |  |  |  |  |  |  |  |  |
 
+## Quality Gate Results
+
+| Gate | Score | Status | Notes | Rollback |
+| --- | ---: | --- | --- | --- |
+| Scope |  |  |  |  |
+| Source |  |  |  |  |
+| Coverage |  |  |  |  |
+| Claim grounding |  |  |  |  |
+| Contradiction |  |  |  |  |
+| Applicability |  |  |  |  |
+| Synthesis |  |  |  |  |
+| Workflow recommendation |  |  |  |  |
+
 ## Synthesis
 
 <source-backed synthesis>

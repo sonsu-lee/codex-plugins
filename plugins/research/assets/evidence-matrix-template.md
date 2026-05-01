@@ -18,6 +18,12 @@
 
 -
 
+## Quality Gate Results
+
+| Gate | Score | Status | Notes | Rollback |
+| --- | ---: | --- | --- | --- |
+|  |  |  |  |  |
+
 ## Proposed Workflow Changes
 
 | Change | Target | Evidence | Cost | Risk | Validation | Rollback |

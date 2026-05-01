@@ -67,6 +67,7 @@ Read `references/source-tiers.md` when the answer depends on source quality.
 Read `references/exa-playbook.md` when Exa is available or the task involves literature discovery.
 Read `references/ai-research-domains.md` for useful AI research source domains.
 Read `references/verification-gates.md` for claim checks, support labels, and contradiction handling.
+Read `references/quality-gates.md` before final synthesis for moderate, deep, comparison, literature-scan, official-guidance-review, or workflow-update-review tasks.
 Read `references/prompt-accuracy-playbook.md` when designing research prompts, evaluating answer accuracy, adding examples, handling long documents, or recommending workflow/prompt changes.
 Read `references/workflow-integration.md` before recommending changes to local workflows.
 
@@ -79,9 +80,10 @@ Read `references/workflow-integration.md` before recommending changes to local w
 5. Build a claim ledger: each major claim needs source, support label, limitation, and applicability.
 6. Extract short grounding quotes or exact snippets for high-impact claims before synthesis; do not output long quoted passages.
 7. Search for contradiction, failed replication, benchmark caveats, or later updates.
-8. Produce a concise synthesis with explicit confidence and gaps.
-9. If workflow changes are requested, propose concrete edits and the evidence supporting each edit.
-10. Write a Markdown research report unless the user explicitly asks for chat-only output.
+8. Run the quality gates. If a hard fail or gate failure occurs, roll back to the named stage and make one bounded correction pass before synthesis.
+9. Produce a concise synthesis with explicit confidence and gaps.
+10. If workflow changes are requested, propose concrete edits and the evidence supporting each edit.
+11. Write a Markdown research report unless the user explicitly asks for chat-only output.
 
 For deep work, keep an evidence matrix. Use `assets/evidence-matrix-template.md` as the output shape if the user asks for an artifact.
 
@@ -116,8 +118,9 @@ Default answer shape:
 2. evidence by source tier
 3. practical workflow implication
 4. caveats and missing evidence
-5. report path when a Markdown report was written
-6. recommended next action
+5. quality gate status
+6. report path when a Markdown report was written
+7. recommended next action
 
 For workflow-update reviews, include:
 
