@@ -1,62 +1,52 @@
-# Research Report: <topic>
+# <주제> 리서치 보고서
 
-Date: <YYYY-MM-DD>
-Mode: <quick-fact | official-guidance-review | literature-scan | comparison | workflow-update-review | deep-research>
-Confidence: <high | medium | low>
+작성일: <YYYY-MM-DD>
+주제: <topic>
+리서치 모드: <quick-fact | official-guidance-review | literature-scan | comparison | workflow-update-review | deep-research>
+확신도: <높음 | 중간 | 낮음>
+검색 기준일: <YYYY-MM-DD 또는 범위>
 
-## Research Question
+## 핵심 답변
 
-<question>
+<질문에 대한 직접 답변을 2-4문장으로 작성한다. 독자가 첫 화면에서 결론을 이해할 수 있어야 한다. 중요한 factual claim에는 짧은 인라인 출처 표기를 붙인다.>
 
-## Working Conclusion
+## 주요 결론
 
-<concise conclusion>
+- <결론 1: 가장 중요한 판단>
+- <결론 2: 근거가 강한 판단>
+- <결론 3: 의사결정에 영향을 주는 판단>
+- <결론 4: 필요한 경우만 추가>
 
-## Method
+## 분석
 
-- Source lanes:
-- Subagents used:
-- Search window:
-- Tools used:
-- Cost posture:
+<결론이 왜 나왔는지 설명한다. 출처별 요약을 나열하지 말고, 근거를 해석해 하나의 논리 흐름으로 연결한다. 공식 문서, 논문, 구현 근거, 반례가 서로 어떻게 맞물리는지 설명한다.>
 
-## Evidence Matrix
+## 비교 또는 판단 프레임
 
-| Source | Tier | Date | Claim | Support | Grounding | Limitation | Workflow Impact |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-|  |  |  |  |  |  |  |  |
+<비교가 필요한 경우에만 표를 사용한다. 표는 선택지, 적용 조건, 장단점, 권장 여부처럼 독자의 판단을 돕는 정보로 제한한다. 필요 없으면 이 섹션을 생략한다.>
 
-## Quality Gate Results
+| 선택지 | 적합한 경우 | 부적합한 경우 | 권장 |
+| --- | --- | --- | --- |
+| <선택지 A> | <조건> | <조건> | <권장/비권장/조건부> |
 
-| Gate | Score | Status | Notes | Rollback |
-| --- | ---: | --- | --- | --- |
-| Scope |  |  |  |  |
-| Source |  |  |  |  |
-| Coverage |  |  |  |  |
-| Claim grounding |  |  |  |  |
-| Contradiction |  |  |  |  |
-| Applicability |  |  |  |  |
-| Synthesis |  |  |  |  |
-| Workflow recommendation |  |  |  |  |
+## 리스크와 한계
 
-## Synthesis
+- <근거 부족, 최신성, 반례, 적용 범위 등 결론을 제한하는 요소>
+- <확신도가 낮거나 추가 확인이 필요한 지점>
+- <사용자가 잘못 일반화하면 위험한 지점>
 
-<source-backed synthesis>
+## 실행 권고
 
-## Contradictions And Gaps
+1. <사용자가 바로 적용할 수 있는 권고>
+2. <검증 또는 모니터링 방법>
+3. <되돌리기 또는 재검토 조건>
 
-- <gap or contradiction>
+## 참고 출처
 
-## Workflow Implications
+### 내용 근거
 
-| Change | Target | Evidence | Cost | Risk | Validation | Rollback |
-| --- | --- | --- | --- | --- | --- | --- |
-|  |  |  |  |  |  |  |
+- <Source title>: <URL>
 
-## Sources
+### 형식 참고
 
-- <source title> - <url>
-
-## Follow-Up Checks
-
-- <next check>
+- <Source title>: <URL>

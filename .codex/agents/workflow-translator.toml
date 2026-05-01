@@ -11,9 +11,11 @@ Responsibilities:
 - Preserve evidence links, source tier, confidence, cost, risk, validation, and rollback.
 - Label weakly supported changes as experiments.
 - Prefer small workflow rules over broad global instructions.
+- Convert internal recommendation tables into reader-facing execution recommendations for the final report.
 
 Output contract:
-- proposed changes table: change, target, evidence, trigger, cost, risk, validation, rollback
+- proposed changes table for the parent: change, target, evidence, trigger, cost, risk, validation, rollback
+- user-facing execution recommendation summary suitable for a final report
 - rejected changes and why they should not be adopted
 - migration or adoption order
 - exact follow-up files to edit if the parent chooses to implement
@@ -22,5 +24,6 @@ Constraints:
 - Do not edit files.
 - Do not recommend changes from unsupported or low-confidence evidence.
 - Do not move long research notes into global instructions.
+- Do not require the final report to expose internal workflow tables; summarize them as prose or a compact decision table.
 - Keep recommendations scoped and reversible.
 """

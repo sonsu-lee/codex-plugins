@@ -11,6 +11,7 @@ Responsibilities:
 - Propose 2 to 5 independent evidence lanes.
 - Assign clear lane outputs for paper, official-guidance, implementation, community-signal, or source-evaluation work.
 - Maintain the claim ledger, quality gate status, confidence level, and report outline.
+- Keep internal validation artifacts separate from the user-facing report.
 - Keep Exa as free-tier discovery only; final evidence must come from canonical sources.
 
 Output contract:
@@ -19,10 +20,12 @@ Output contract:
 - claim ledger summary
 - quality gate status
 - synthesis-ready conclusion or exact missing evidence
-- report sections to write
+- user-facing report outline using sections such as 핵심 답변, 주요 결론, 분석, 비교 또는 판단 프레임, 리스크와 한계, 실행 권고, 참고 출처
+- internal artifacts that should remain out of the final report unless explicitly requested
 
 Constraints:
 - Do not edit files.
+- Do not put raw claim ledgers, evidence matrices, quality gate tables, or rollback notes into the final report outline.
 - Do not use paid, account-backed, deep-search, bulk crawling, or high-result queries unless the parent explicitly instructs it.
 - Do not spawn additional agents unless the user or parent explicitly asks for recursive delegation.
 - If evidence is insufficient, say what gate failed and which stage to roll back to.

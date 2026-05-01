@@ -68,6 +68,7 @@ Read `references/exa-playbook.md` when Exa is available or the task involves lit
 Read `references/ai-research-domains.md` for useful AI research source domains.
 Read `references/verification-gates.md` for claim checks, support labels, and contradiction handling.
 Read `references/quality-gates.md` before final synthesis for moderate, deep, comparison, literature-scan, official-guidance-review, or workflow-update-review tasks.
+Read `references/report-writing-style.md` before writing any Markdown report artifact.
 Read `references/agent-orchestration.md` when the user asks for deep, parallel, multi-agent, squad, or delegated research.
 Read `references/prompt-accuracy-playbook.md` when designing research prompts, evaluating answer accuracy, adding examples, handling long documents, or recommending workflow/prompt changes.
 Read `references/workflow-integration.md` before recommending changes to local workflows.
@@ -85,9 +86,9 @@ Read `references/workflow-integration.md` before recommending changes to local w
 9. Run the quality gates. If a hard fail or gate failure occurs, roll back to the named stage and make one bounded correction pass before synthesis.
 10. Produce a concise synthesis with explicit confidence and gaps.
 11. If workflow changes are requested, propose concrete edits and the evidence supporting each edit.
-12. Write a Markdown research report unless the user explicitly asks for chat-only output.
+12. Write a reader-facing Markdown research report unless the user explicitly asks for chat-only output. Do not expose internal claim ledgers, evidence matrices, quality gate tables, rollback notes, or raw subagent work in the final report unless the user explicitly asks for an audit/debug appendix.
 
-For deep work, keep an evidence matrix. Use `assets/evidence-matrix-template.md` as the output shape if the user asks for an artifact.
+For deep work, keep an evidence matrix internally. Use `assets/evidence-matrix-template.md` only if the user explicitly asks for an evidence artifact or audit appendix.
 
 ## Report Artifact
 
@@ -95,8 +96,11 @@ At the end of a research task, create a Markdown report file.
 
 - If the user gives an output path, use it.
 - Otherwise write to `research/reports/YYYY-MM-DD-<topic-slug>.md` in the current workspace.
-- Use `assets/research-report-template.md` as the report shape.
-- Keep the chat response short and link to the report path.
+- Use `assets/research-report-template.md` as the reader-facing report shape.
+- Default report prose to Korean unless the user asks for another language.
+- Start the report with the direct answer and major conclusions, then analysis, risks/limits, execution recommendations, and sources.
+- Keep internal validation material out of the final report. `Claim ledger`, `Evidence Matrix`, `Quality Gate Results`, `Workflow Implications`, and rollback tables are working artifacts, not default report sections.
+- Keep the chat response short: core conclusion, confidence, report path, and one recommended next action.
 - Do not write a report for tiny `quick-fact` answers unless the user asked for a saved artifact.
 - If no workspace write access is available, return the report in chat and state that the file could not be written.
 
@@ -124,20 +128,20 @@ The coordinating agent keeps the research question, source-tier rules, conflict 
 
 Default answer shape:
 
-1. working conclusion
-2. evidence by source tier
-3. practical workflow implication
-4. caveats and missing evidence
-5. quality gate status
-6. report path when a Markdown report was written
-7. recommended next action
+1. direct conclusion
+2. confidence level
+3. report path when a Markdown report was written
+4. one practical next action
+
+The chat answer should be short. Put the full synthesis in the Markdown report when a report is written.
 
 For workflow-update reviews, include:
 
-- `change`: the proposed rule or workflow change
-- `where`: plugin, skill, AGENTS.md, config, or agent prompt
-- `evidence`: sources and support level
-- `risk`: cost, complexity, brittleness, or false-positive risk
-- `rollback`: how to revert if it performs poorly
+- proposed rules or workflow changes as reader-facing recommendations
+- target surface: plugin, skill, AGENTS.md, config, or agent prompt
+- evidence summary and confidence
+- cost, risk, validation, and rollback conditions
+
+Do not present the internal quality gate table or full evidence matrix in the final report unless explicitly requested.
 
 Be concise. Prefer a small number of strong sources over a long list of weak ones.
