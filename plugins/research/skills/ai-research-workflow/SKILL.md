@@ -81,8 +81,20 @@ Read `references/workflow-integration.md` before recommending changes to local w
 7. Search for contradiction, failed replication, benchmark caveats, or later updates.
 8. Produce a concise synthesis with explicit confidence and gaps.
 9. If workflow changes are requested, propose concrete edits and the evidence supporting each edit.
+10. Write a Markdown research report unless the user explicitly asks for chat-only output.
 
 For deep work, keep an evidence matrix. Use `assets/evidence-matrix-template.md` as the output shape if the user asks for an artifact.
+
+## Report Artifact
+
+At the end of a research task, create a Markdown report file.
+
+- If the user gives an output path, use it.
+- Otherwise write to `research/reports/YYYY-MM-DD-<topic-slug>.md` in the current workspace.
+- Use `assets/research-report-template.md` as the report shape.
+- Keep the chat response short and link to the report path.
+- Do not write a report for tiny `quick-fact` answers unless the user asked for a saved artifact.
+- If no workspace write access is available, return the report in chat and state that the file could not be written.
 
 ## Subagents
 
@@ -104,7 +116,8 @@ Default answer shape:
 2. evidence by source tier
 3. practical workflow implication
 4. caveats and missing evidence
-5. recommended next action
+5. report path when a Markdown report was written
+6. recommended next action
 
 For workflow-update reviews, include:
 
