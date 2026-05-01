@@ -1,10 +1,11 @@
 {
   "mcpServers": {
     "exa": {
-      "command": "/bin/zsh",
+      "command": "npx",
       "args": [
-        "-lc",
-        "source ~/.zshrc >/dev/null 2>&1; exec npx -y exa-mcp-server"
+        "-y",
+        "mcp-remote",
+        "https://mcp.exa.ai/mcp"
       ]
     }
   }

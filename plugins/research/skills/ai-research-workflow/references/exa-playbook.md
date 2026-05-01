@@ -1,6 +1,19 @@
 # Exa Playbook
 
-Use Exa as a retrieval layer, not as the final judge.
+Use Exa as a free-tier discovery layer, not as the final judge.
+
+## Default Mode
+
+The research plugin defaults to Exa's hosted MCP free path:
+
+```json
+{
+  "command": "npx",
+  "args": ["-y", "mcp-remote", "https://mcp.exa.ai/mcp"]
+}
+```
+
+This intentionally does not read `EXA_API_KEY` from the environment and does not attach account-backed headers. Do not switch to a key-backed Exa server unless the user explicitly asks for paid or account-backed usage.
 
 ## When Exa Helps
 
@@ -17,18 +30,7 @@ Paper scan:
 ```json
 {
   "query": "agentic coding benchmark long horizon software engineering agents",
-  "category": "research paper",
-  "numResults": 10,
-  "includeDomains": [
-    "arxiv.org",
-    "openreview.net",
-    "proceedings.mlr.press",
-    "aclanthology.org",
-    "paperswithcode.com"
-  ],
-  "contents": {
-    "highlights": true
-  }
+  "numResults": 5
 }
 ```
 
@@ -37,17 +39,7 @@ Official guidance scan:
 ```json
 {
   "query": "agentic coding best practices planning verification subagents",
-  "includeDomains": [
-    "openai.com",
-    "developers.openai.com",
-    "help.openai.com",
-    "anthropic.com",
-    "code.claude.com",
-    "docs.claude.com"
-  ],
-  "contents": {
-    "highlights": true
-  }
+  "numResults": 5
 }
 ```
 
@@ -56,13 +48,7 @@ Implementation scan:
 ```json
 {
   "query": "repository benchmark agentic coding terminal bench swe bench harness",
-  "includeDomains": [
-    "github.com",
-    "paperswithcode.com"
-  ],
-  "contents": {
-    "highlights": true
-  }
+  "numResults": 5
 }
 ```
 
@@ -79,6 +65,8 @@ Always state the date window when it matters.
 ## Verification Rules
 
 - Fetch the original paper or official page before relying on a claim.
+- Resolve canonical IDs when possible: DOI, arXiv ID, OpenReview URL, PMID, PMCID, Semantic Scholar paper ID, GitHub repo, or publisher URL.
+- Prefer free official APIs and canonical pages for verification after Exa discovers candidates.
 - Check whether a paper is peer-reviewed, preprint-only, updated, withdrawn, or superseded.
 - For benchmarks, inspect the task definition and whether the cited score is from the official leaderboard, paper, or vendor post.
 - For code, prefer maintained repos with tests, releases, issues, or reproducibility notes.
@@ -86,7 +74,9 @@ Always state the date window when it matters.
 
 ## Cost Control
 
-- Start with 5 to 10 results.
+- Start with 3 to 5 results.
 - Fetch full text only for sources likely to affect the conclusion.
-- Use deep search only for broad synthesis or when ordinary search misses important context.
+- Use only the default free hosted MCP tools unless the user explicitly approves paid/account-backed usage.
+- Do not use Exa deep search, advanced search, monitors, bulk crawling, or high-result queries by default.
+- If Exa returns a quota/rate-limit/payment error, stop using Exa for that task and fall back to official free APIs or native web search.
 - Summarize retrieved evidence before opening another retrieval lane.

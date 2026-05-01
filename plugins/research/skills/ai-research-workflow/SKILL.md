@@ -47,9 +47,19 @@ Select the smallest useful source mix:
 - For OpenAI product behavior or Codex guidance, prefer official OpenAI documentation and help articles first.
 - For Anthropic/Claude Code workflow design, prefer official Claude Code docs and Anthropic engineering posts first.
 - For current libraries, APIs, and SDK behavior, use Context7 or official documentation before broad web search.
-- For papers and recent AI research, prefer Exa search/fetch when available, then verify against arXiv, OpenReview, conference pages, or publisher pages.
+- For papers and recent AI research, use free official indexes and canonical sources first when the target is clear: arXiv, OpenReview, Crossref, OpenAlex, Semantic Scholar, PubMed, Europe PMC, Unpaywall, publisher pages, or GitHub.
+- Use Exa as a free-tier discovery layer when the target source is unclear, when broad web discovery is needed, or when you need to find official pages, benchmark repos, implementation repos, and recent discussions quickly.
 - For implementation reality, inspect GitHub repos, issues, release notes, and benchmark harnesses.
 - For community signals, use X/HN/Reddit/blogs only as discovery leads, not as final evidence.
+
+## Budget Policy
+
+Default to free-first research:
+
+- Do not use paid search, paid API keys, deep research, advanced search, scraping at scale, or bulk content extraction unless the user explicitly asks for it.
+- The bundled Exa MCP should be treated as free-tier discovery only. Keep result counts small and fetch only sources likely to affect the conclusion.
+- If a free quota or rate limit is hit, stop using that source and fall back to official free APIs, native web search, or ask before switching to a paid/account-backed path.
+- Final evidence must come from canonical source pages, official APIs, or original documents, not from Exa summaries.
 
 Read `references/source-tiers.md` when the answer depends on source quality.
 Read `references/exa-playbook.md` when Exa is available or the task involves literature discovery.
@@ -61,7 +71,7 @@ Read `references/workflow-integration.md` before recommending changes to local w
 
 1. Restate the research objective and classify the mode.
 2. Define 2 to 5 search lanes, each with source preferences.
-3. Retrieve candidates from official sources, Exa, GitHub, and web search as appropriate.
+3. Retrieve candidates from official free sources, Exa free-tier discovery, GitHub, and web search as appropriate.
 4. Fetch original sources for all important claims.
 5. Decompose major claims into evidence, limitation, and applicability.
 6. Search for contradiction, failed replication, benchmark caveats, or later updates.
