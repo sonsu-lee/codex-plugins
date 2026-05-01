@@ -40,11 +40,11 @@ Classify the request first:
 - `workflow-update-review`: decide whether evidence should change a prompt, skill, plugin, or agent workflow
 - `deep-research`: broad synthesis with contradiction checks and evidence matrix
 
-Escalate modes only when the user asks for depth or when the question cannot be answered safely from a narrow source set.
+Escalate to `deep-research` when the user asks to research, investigate broadly, compare workflow architecture, design a plugin/agent/process, or produce a report. Do not collapse broad workflow questions into a short comparison brief.
 
 ## Source Plan
 
-Select the smallest useful source mix:
+Select the source mix needed to answer a skeptical reader's likely questions. Do not optimize for source count; optimize for whether the evidence is sufficient for the conclusion.
 
 - For OpenAI product behavior or Codex guidance, prefer official OpenAI documentation and help articles first.
 - For Anthropic/Claude Code workflow design, prefer official Claude Code docs and Anthropic engineering posts first.
@@ -68,6 +68,7 @@ Read `references/exa-playbook.md` when Exa is available or the task involves lit
 Read `references/ai-research-domains.md` for useful AI research source domains.
 Read `references/verification-gates.md` for claim checks, support labels, and contradiction handling.
 Read `references/quality-gates.md` before final synthesis for moderate, deep, comparison, literature-scan, official-guidance-review, or workflow-update-review tasks.
+Read `references/report-substance-standards.md` before planning, researching, or writing `comparison`, `workflow-update-review`, `literature-scan`, or `deep-research` reports.
 Read `references/report-writing-style.md` before writing any Markdown report artifact.
 Read `references/agent-orchestration.md` when the user asks for deep, parallel, multi-agent, squad, or delegated research.
 Read `references/prompt-accuracy-playbook.md` when designing research prompts, evaluating answer accuracy, adding examples, handling long documents, or recommending workflow/prompt changes.
@@ -76,7 +77,7 @@ Read `references/workflow-integration.md` before recommending changes to local w
 ## Default Procedure
 
 1. Restate the research objective and classify the mode.
-2. Define 2 to 5 search lanes, each with source preferences.
+2. Define the evidence lanes needed by the question, each with source preferences and reader-sufficiency targets from `references/report-substance-standards.md`.
 3. Retrieve candidates from official free sources, Exa free-tier discovery, GitHub, and web search as appropriate.
 4. Fetch original sources for all important claims.
 5. Build a claim ledger: each major claim needs source, support label, limitation, and applicability.
@@ -84,7 +85,7 @@ Read `references/workflow-integration.md` before recommending changes to local w
 7. Search for contradiction, failed replication, benchmark caveats, or later updates.
 8. If subagents were used, merge lane outputs and resolve conflicts before quality gates.
 9. Run the quality gates. If a hard fail or gate failure occurs, roll back to the named stage and make one bounded correction pass before synthesis.
-10. Produce a concise synthesis with explicit confidence and gaps.
+10. Produce a substantive synthesis with explicit confidence and gaps. For report-producing modes, do not stop until the report explains the reasoning, tradeoffs, limits, and practical implications well enough for an informed reader to evaluate it.
 11. If workflow changes are requested, propose concrete edits and the evidence supporting each edit.
 12. Write a reader-facing Markdown research report unless the user explicitly asks for chat-only output. Do not expose internal claim ledgers, evidence matrices, quality gate tables, rollback notes, or raw subagent work in the final report unless the user explicitly asks for an audit/debug appendix.
 
@@ -99,6 +100,7 @@ At the end of a research task, create a Markdown report file.
 - Use `assets/research-report-template.md` as the reader-facing report shape.
 - Default report prose to Korean unless the user asks for another language.
 - Start the report with the direct answer and major conclusions, then analysis, risks/limits, execution recommendations, and sources.
+- For `comparison`, `workflow-update-review`, `literature-scan`, and `deep-research`, meet the relevant substance standard in `references/report-substance-standards.md`. An under-argued report is a failed report even if it has citations.
 - Keep internal validation material out of the final report. `Claim ledger`, `Evidence Matrix`, `Quality Gate Results`, `Workflow Implications`, and rollback tables are working artifacts, not default report sections.
 - Keep the chat response short: core conclusion, confidence, report path, and one recommended next action.
 - Do not write a report for tiny `quick-fact` answers unless the user asked for a saved artifact.
@@ -135,6 +137,8 @@ Default answer shape:
 
 The chat answer should be short. Put the full synthesis in the Markdown report when a report is written.
 
+Do not confuse a short chat answer with a short report. The chat response should be brief; the saved report should be deep enough for the selected mode.
+
 For workflow-update reviews, include:
 
 - proposed rules or workflow changes as reader-facing recommendations
@@ -144,4 +148,4 @@ For workflow-update reviews, include:
 
 Do not present the internal quality gate table or full evidence matrix in the final report unless explicitly requested.
 
-Be concise. Prefer a small number of strong sources over a long list of weak ones.
+Keep the chat response concise. In the saved report, use the canonical sources needed to support the argument; avoid both source padding and thin sourcing.

@@ -9,6 +9,7 @@ Coordinate a research workflow; do not act as a broad web-search worker.
 Responsibilities:
 - Restate the research objective, mode, scope, and excluded areas.
 - Propose 2 to 5 independent evidence lanes.
+- For broad report-producing tasks, enforce the plugin's report-substance standards rather than planning a short briefing.
 - Assign clear lane outputs for paper, official-guidance, implementation, community-signal, or source-evaluation work.
 - Maintain the claim ledger, quality gate status, confidence level, and report outline.
 - Keep internal validation artifacts separate from the user-facing report.
@@ -21,6 +22,7 @@ Output contract:
 - quality gate status
 - synthesis-ready conclusion or exact missing evidence
 - user-facing report outline using sections such as 핵심 답변, 주요 결론, 분석, 비교 또는 판단 프레임, 리스크와 한계, 실행 권고, 참고 출처
+- substance/coverage adequacy note: reader questions, necessary evidence lanes, and reasoning sections needed
 - internal artifacts that should remain out of the final report unless explicitly requested
 
 Constraints:

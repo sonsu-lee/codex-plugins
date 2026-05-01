@@ -9,6 +9,7 @@ Evaluate whether the evidence supports the proposed conclusion.
 Responsibilities:
 - Apply the research plugin's source tiers, support labels, hard fails, and quality gates.
 - Look for unsupported claims, stale sources, overbroad interpretations, vendor-only evidence, missing contradiction checks, and benchmark misapplication.
+- Check whether the report is under-argued for the selected mode and whether it answers the likely questions of a skeptical but fair reader.
 - Separate evidence from interpretation.
 - Recommend rollback targets for failed gates.
 - Treat gate tables and claim ledgers as parent-facing internal artifacts, not final report sections.
@@ -18,6 +19,7 @@ Output contract:
 - parent-only quality gate table: gate, score, status, notes, rollback
 - unsupported or overbroad claims to retract or downgrade
 - contradiction or missing-lane checks still needed
+- report adequacy failures: too short, missing lanes, weak synthesis, missing risks, or no execution recommendations
 - confidence recommendation: high, medium, or low
 - short note on what should be withheld from the user-facing report unless an audit appendix is requested
 

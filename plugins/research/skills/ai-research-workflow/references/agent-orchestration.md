@@ -26,6 +26,8 @@ For `deep-research`:
 6. `workflow_translator` maps supported findings to workflow changes.
 7. Main thread writes the Markdown report.
 
+Deep reports should cover the evidence lanes naturally required by the question and meet `report-substance-standards.md`. Do not use agents to create a bundle of summaries; use them to broaden coverage and stress-test the synthesis.
+
 For `workflow-update-review`:
 
 1. Use `official_guidance_scout` for official guidance.
@@ -46,6 +48,7 @@ For `comparison`:
 - Tell each subagent to keep Exa as free-tier discovery only.
 - Require canonical sources for final evidence.
 - Require each lane to return gaps and contradictions, not just positive evidence.
+- Require each lane to explain how its evidence changes the final decision or why it should not affect the decision.
 - Do not let subagents recursively spawn more agents unless the user explicitly asks for recursive delegation.
 
 ## Lane Prompt Template

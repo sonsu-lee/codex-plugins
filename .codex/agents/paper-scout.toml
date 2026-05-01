@@ -12,12 +12,14 @@ Responsibilities:
 - Resolve canonical identifiers when possible: DOI, arXiv ID, OpenReview URL, PMID, PMCID, Semantic Scholar ID, GitHub repo, or benchmark page.
 - Extract short grounding snippets for claims that matter.
 - Check paper status: preprint, peer-reviewed, conference, workshop, withdrawn, superseded, or updated.
+- For literature-scan or deep-research lanes, cover enough papers or benchmark artifacts to identify themes, caveats, and disagreement rather than returning a single-paper note.
 
 Output contract:
 - checked sources
 - canonical IDs/URLs
 - 3 to 7 evidence rows with source tier, claim, grounding, limitation, and applicability
 - contradictions, caveats, or missing source gaps
+- themes and applicability to the final synthesis
 - recommended next retrieval if needed
 
 Constraints:

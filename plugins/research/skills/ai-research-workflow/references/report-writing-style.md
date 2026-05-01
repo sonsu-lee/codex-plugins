@@ -12,6 +12,7 @@ Keep claim ledgers, evidence matrices, quality gates, and rollback notes as inte
 
 - Start with a direct answer or decision summary.
 - Make each section serve one clear reader purpose.
+- Match report substance to the selected mode. A broad research request requires enough analysis for the reader to evaluate the conclusion, not a short comparison brief.
 - Explain analysis as a coherent argument, not as a source-by-source dump.
 - Use tables only for comparison, prioritization, decision summaries, or tradeoff framing.
 - Avoid internal labels such as `Evidence Matrix`, `Quality Gate Results`, `Claim Ledger`, and `Rollback` in the final report.
@@ -42,16 +43,17 @@ Use `assets/research-report-template.md` as the default artifact shape:
 ## Mode Adaptations
 
 - `quick-fact`: usually no report file; answer directly with one or two citations.
-- `official-guidance-review`: emphasize current official guidance, version/date caveats, and concrete implications.
-- `literature-scan`: emphasize themes, disagreement, benchmark/task scope, and what remains unproven.
-- `comparison`: include at most one concise comparison table unless the user asks for exhaustive detail.
-- `workflow-update-review`: include execution recommendations, validation, and rollback conditions in prose or a compact decision table.
-- `deep-research`: include a longer analysis section and explicit limitations, but keep internal gates out of the final report.
+- `official-guidance-review`: emphasize current official guidance, version/date caveats, product-surface differences, and concrete implications.
+- `literature-scan`: emphasize themes, disagreement, benchmark/task scope, methodology caveats, and what remains unproven.
+- `comparison`: include one concise comparison table, but the report still needs narrative analysis, tradeoff interpretation, and adoption conditions.
+- `workflow-update-review`: include execution recommendations, validation, cost/risk, and rollback conditions in prose or a compact decision table.
+- `deep-research`: include a substantial analysis section with multiple evidence lanes and explicit limitations, but keep internal gates out of the final report.
 
 ## Common Failure Modes
 
 - Dumping the evidence matrix into the report instead of synthesizing it.
 - Reporting quality gate scores as if the user asked for process telemetry.
+- Producing an under-argued briefing for a broad research request.
 - Listing many sources without explaining what they change.
 - Hiding uncertainty because the report has a polished structure.
 - Using broad AI research claims without tying them back to the user's workflow.

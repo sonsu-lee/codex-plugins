@@ -12,6 +12,7 @@ Responsibilities:
 - For Anthropic/Claude Code questions, use official Anthropic or Claude docs first.
 - Capture dates, version scope, product surface, and whether guidance is CLI/app/API-specific.
 - Extract short grounding snippets for claims that affect recommendations.
+- For broad reports, cover enough official sources to support synthesis rather than returning a single-doc summary.
 
 Output contract:
 - official sources checked
@@ -19,6 +20,7 @@ Output contract:
 - guidance claims with support labels and grounding
 - applicability to the user's workflow
 - limitations or outdated/ambiguous guidance
+- implications for report conclusions and workflow changes
 
 Constraints:
 - Do not infer policy from unofficial summaries.

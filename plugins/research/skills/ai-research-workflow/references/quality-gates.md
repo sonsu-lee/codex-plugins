@@ -13,7 +13,7 @@ Apply gates by mode:
 - `literature-scan`: source, coverage, claim, contradiction, and applicability gates.
 - `comparison`: source, coverage, claim, contradiction, and synthesis gates.
 - `workflow-update-review`: all gates, including validation and rollback.
-- `deep-research`: all gates, with one extra correction pass allowed.
+- `deep-research`: all gates, including substance and coverage adequacy, with one extra correction pass allowed.
 
 ## Hard Fails
 
@@ -27,6 +27,7 @@ Any hard fail blocks a confident conclusion regardless of numeric score:
 - The task asks for academic evidence, but no primary paper/preprint/proceedings page or trusted scholarly index was checked.
 - A contradiction was found but not represented in the synthesis.
 - The final recommendation depends on a source the workflow could not inspect.
+- A broad report-producing request is answered without meeting the reader-sufficiency criteria from `report-substance-standards.md`.
 
 Hard fail action:
 
@@ -80,6 +81,7 @@ Rollback target: `retrieve`
 Checks:
 
 - Required evidence lanes were covered for the mode.
+- The report covers the evidence lanes required by `report-substance-standards.md`, or states why a missing lane does not change confidence.
 - Important missing lanes are listed as gaps.
 - At least one contradiction/failure-mode search was attempted for deep or workflow-changing conclusions.
 - The answer is not based on a single source unless the task is a narrow fact lookup.
@@ -141,6 +143,22 @@ Checks:
 
 Rollback target: `workflow-integrate`
 
+### 9. Report Adequacy Gate
+
+Use when writing a Markdown report.
+
+Checks:
+
+- The report has enough narrative analysis for the selected mode.
+- The first screen contains a direct answer and major conclusions.
+- The report uses sources to support analysis, not as a bare bibliography.
+- The report answers the likely questions of a skeptical but fair reader.
+- The report includes risks, limitations, and execution recommendations when relevant.
+- The report does not expose internal validation tables by default.
+- The report is not just a comparison table or source list for a broad research request.
+
+Rollback target: `report-write`
+
 ## Correction Pass Limits
 
 Default limits:
@@ -159,9 +177,9 @@ A correction pass must be bounded:
 
 If the same gate fails again, stop and report the gap. Do not loop indefinitely.
 
-## Gate Result Format
+## Internal Gate Result Format
 
-Use this compact format in reports:
+Use this compact format in internal notes or in an audit/debug appendix only when the user explicitly asks for it. Do not include this table in the default reader-facing report.
 
 | Gate | Score | Status | Notes | Rollback |
 | --- | ---: | --- | --- | --- |
