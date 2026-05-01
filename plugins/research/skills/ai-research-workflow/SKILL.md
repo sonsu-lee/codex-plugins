@@ -1,0 +1,103 @@
+---
+name: ai-research-workflow
+description: Use for AI/ML research tasks that require recent papers, official model or coding-agent guidance, benchmark interpretation, source quality checks, or translating evidence into local workflow/plugin/agent recommendations. Especially relevant for Exa-backed literature scans, OpenAI/Anthropic guidance reviews, and evidence-backed workflow updates.
+---
+
+# AI Research Workflow
+
+Use this skill to turn AI research questions into source-backed, workflow-relevant conclusions.
+
+Primary scope:
+
+- AI/ML papers, preprints, benchmarks, evals, and implementation repos
+- official guidance from model labs and tooling vendors
+- agentic coding, research-agent, planning, review, and subagent workflows
+- evidence-backed updates to local prompts, skills, plugins, AGENTS.md, or agent roles
+
+Do not use this skill for narrow library API questions when a documentation-specific skill or MCP source can answer directly.
+
+## Operating Contract
+
+The workflow owns four things:
+
+1. find relevant sources
+2. verify important claims against original material
+3. separate strong evidence from weak signals
+4. translate findings into practical workflow recommendations
+
+Never treat a search result summary, social post, or blog paraphrase as final evidence. Fetch or inspect the original source for any claim that affects the conclusion.
+
+## Research Modes
+
+Classify the request first:
+
+- `quick-fact`: one or two direct facts with original-source confirmation
+- `official-guidance-review`: vendor docs, model cards, release notes, or best-practice posts
+- `literature-scan`: papers/preprints around a concept, method, or benchmark
+- `comparison`: compare methods, models, tools, or workflow patterns
+- `workflow-update-review`: decide whether evidence should change a prompt, skill, plugin, or agent workflow
+- `deep-research`: broad synthesis with contradiction checks and evidence matrix
+
+Escalate modes only when the user asks for depth or when the question cannot be answered safely from a narrow source set.
+
+## Source Plan
+
+Select the smallest useful source mix:
+
+- For OpenAI product behavior or Codex guidance, prefer official OpenAI documentation and help articles first.
+- For Anthropic/Claude Code workflow design, prefer official Claude Code docs and Anthropic engineering posts first.
+- For current libraries, APIs, and SDK behavior, use Context7 or official documentation before broad web search.
+- For papers and recent AI research, prefer Exa search/fetch when available, then verify against arXiv, OpenReview, conference pages, or publisher pages.
+- For implementation reality, inspect GitHub repos, issues, release notes, and benchmark harnesses.
+- For community signals, use X/HN/Reddit/blogs only as discovery leads, not as final evidence.
+
+Read `references/source-tiers.md` when the answer depends on source quality.
+Read `references/exa-playbook.md` when Exa is available or the task involves literature discovery.
+Read `references/ai-research-domains.md` for useful AI research source domains.
+Read `references/verification-gates.md` for claim checks, support labels, and contradiction handling.
+Read `references/workflow-integration.md` before recommending changes to local workflows.
+
+## Default Procedure
+
+1. Restate the research objective and classify the mode.
+2. Define 2 to 5 search lanes, each with source preferences.
+3. Retrieve candidates from official sources, Exa, GitHub, and web search as appropriate.
+4. Fetch original sources for all important claims.
+5. Decompose major claims into evidence, limitation, and applicability.
+6. Search for contradiction, failed replication, benchmark caveats, or later updates.
+7. Produce a concise synthesis with explicit confidence and gaps.
+8. If workflow changes are requested, propose concrete edits and the evidence supporting each edit.
+
+For deep work, keep an evidence matrix. Use `assets/evidence-matrix-template.md` as the output shape if the user asks for an artifact.
+
+## Subagents
+
+Use subagents only when the user explicitly asks for deep/parallel agent work or when the surrounding instructions allow delegation. Good independent lanes:
+
+- official vendor guidance
+- academic papers and benchmarks
+- implementation repos and issues
+- community signals and operational reports
+- source-quality/adversarial review
+
+The coordinating agent keeps the research question, source-tier rules, conflict resolution, and final synthesis.
+
+## Output Contract
+
+Default answer shape:
+
+1. working conclusion
+2. evidence by source tier
+3. practical workflow implication
+4. caveats and missing evidence
+5. recommended next action
+
+For workflow-update reviews, include:
+
+- `change`: the proposed rule or workflow change
+- `where`: plugin, skill, AGENTS.md, config, or agent prompt
+- `evidence`: sources and support level
+- `risk`: cost, complexity, brittleness, or false-positive risk
+- `rollback`: how to revert if it performs poorly
+
+Be concise. Prefer a small number of strong sources over a long list of weak ones.

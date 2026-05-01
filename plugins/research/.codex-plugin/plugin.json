@@ -1,0 +1,42 @@
+{
+  "name": "research",
+  "version": "0.1.0",
+  "description": "Evidence-first AI research workflows for papers, official guidance, benchmarks, and workflow updates.",
+  "author": {
+    "name": "sonsu"
+  },
+  "homepage": "file:///Users/sonsu/Documents/New%20project/plugins/research",
+  "repository": "file:///Users/sonsu/Documents/New%20project",
+  "license": "UNLICENSED",
+  "keywords": [
+    "research",
+    "ai",
+    "papers",
+    "exa",
+    "evidence",
+    "workflow"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Research",
+    "shortDescription": "AI research with source tiers, Exa-first retrieval, and verification gates.",
+    "longDescription": "Local research workflows for investigating AI papers, official model and tooling guidance, benchmarks, implementations, and community signals. The plugin emphasizes source-tiering, original-source verification, contradiction checks, and converting evidence into actionable workflow recommendations.",
+    "developerName": "sonsu",
+    "category": "Research",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "file:///Users/sonsu/Documents/New%20project/plugins/research",
+    "privacyPolicyURL": "https://openai.com/policies/row-privacy-policy/",
+    "termsOfServiceURL": "https://openai.com/policies/row-terms-of-use/",
+    "defaultPrompt": [
+      "Research recent AI agent workflow evidence.",
+      "Compare official AI coding agent guidance.",
+      "Turn AI research findings into workflow rules."
+    ],
+    "brandColor": "#2563EB",
+    "screenshots": []
+  }
+}
