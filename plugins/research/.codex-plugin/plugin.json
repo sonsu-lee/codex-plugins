@@ -17,6 +17,7 @@
     "workflow"
   ],
   "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Research",
     "shortDescription": "AI research with source tiers, Exa-first retrieval, and verification gates.",
