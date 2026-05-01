@@ -68,6 +68,7 @@ Read `references/exa-playbook.md` when Exa is available or the task involves lit
 Read `references/ai-research-domains.md` for useful AI research source domains.
 Read `references/verification-gates.md` for claim checks, support labels, and contradiction handling.
 Read `references/quality-gates.md` before final synthesis for moderate, deep, comparison, literature-scan, official-guidance-review, or workflow-update-review tasks.
+Read `references/agent-orchestration.md` when the user asks for deep, parallel, multi-agent, squad, or delegated research.
 Read `references/prompt-accuracy-playbook.md` when designing research prompts, evaluating answer accuracy, adding examples, handling long documents, or recommending workflow/prompt changes.
 Read `references/workflow-integration.md` before recommending changes to local workflows.
 
@@ -80,10 +81,11 @@ Read `references/workflow-integration.md` before recommending changes to local w
 5. Build a claim ledger: each major claim needs source, support label, limitation, and applicability.
 6. Extract short grounding quotes or exact snippets for high-impact claims before synthesis; do not output long quoted passages.
 7. Search for contradiction, failed replication, benchmark caveats, or later updates.
-8. Run the quality gates. If a hard fail or gate failure occurs, roll back to the named stage and make one bounded correction pass before synthesis.
-9. Produce a concise synthesis with explicit confidence and gaps.
-10. If workflow changes are requested, propose concrete edits and the evidence supporting each edit.
-11. Write a Markdown research report unless the user explicitly asks for chat-only output.
+8. If subagents were used, merge lane outputs and resolve conflicts before quality gates.
+9. Run the quality gates. If a hard fail or gate failure occurs, roll back to the named stage and make one bounded correction pass before synthesis.
+10. Produce a concise synthesis with explicit confidence and gaps.
+11. If workflow changes are requested, propose concrete edits and the evidence supporting each edit.
+12. Write a Markdown research report unless the user explicitly asks for chat-only output.
 
 For deep work, keep an evidence matrix. Use `assets/evidence-matrix-template.md` as the output shape if the user asks for an artifact.
 
@@ -107,6 +109,14 @@ Use subagents only when the user explicitly asks for deep/parallel agent work or
 - implementation repos and issues
 - community signals and operational reports
 - source-quality/adversarial review
+
+Project-scoped custom agents are available for research workflows:
+
+- `research_head`
+- `paper_scout`
+- `official_guidance_scout`
+- `source_evaluator`
+- `workflow_translator`
 
 The coordinating agent keeps the research question, source-tier rules, conflict resolution, and final synthesis.
 

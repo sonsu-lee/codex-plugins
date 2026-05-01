@@ -15,6 +15,7 @@ Confidence: <high | medium | low>
 ## Method
 
 - Source lanes:
+- Subagents used:
 - Search window:
 - Tools used:
 - Cost posture:
