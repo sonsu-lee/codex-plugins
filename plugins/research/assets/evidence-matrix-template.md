@@ -10,9 +10,9 @@
 
 ## Evidence
 
-| Source | Tier | Date | Claim | Support | Limitation | Workflow Impact |
-| --- | --- | --- | --- | --- | --- | --- |
-|  |  |  |  |  |  |  |
+| Source | Tier | Date | Claim | Support | Grounding | Limitation | Workflow Impact |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |  |  |
 
 ## Contradictions Or Gaps
 

@@ -27,6 +27,8 @@ The workflow owns four things:
 
 Never treat a search result summary, social post, or blog paraphrase as final evidence. Fetch or inspect the original source for any claim that affects the conclusion.
 
+For complex research tasks, structure working prompts and notes with XML-style tags so instructions, context, documents, claims, evidence, and output requirements are not confused with each other. The final answer should follow the output contract below unless the user asks for XML.
+
 ## Research Modes
 
 Classify the request first:
@@ -65,6 +67,7 @@ Read `references/source-tiers.md` when the answer depends on source quality.
 Read `references/exa-playbook.md` when Exa is available or the task involves literature discovery.
 Read `references/ai-research-domains.md` for useful AI research source domains.
 Read `references/verification-gates.md` for claim checks, support labels, and contradiction handling.
+Read `references/prompt-accuracy-playbook.md` when designing research prompts, evaluating answer accuracy, adding examples, handling long documents, or recommending workflow/prompt changes.
 Read `references/workflow-integration.md` before recommending changes to local workflows.
 
 ## Default Procedure
@@ -73,10 +76,11 @@ Read `references/workflow-integration.md` before recommending changes to local w
 2. Define 2 to 5 search lanes, each with source preferences.
 3. Retrieve candidates from official free sources, Exa free-tier discovery, GitHub, and web search as appropriate.
 4. Fetch original sources for all important claims.
-5. Decompose major claims into evidence, limitation, and applicability.
-6. Search for contradiction, failed replication, benchmark caveats, or later updates.
-7. Produce a concise synthesis with explicit confidence and gaps.
-8. If workflow changes are requested, propose concrete edits and the evidence supporting each edit.
+5. Build a claim ledger: each major claim needs source, support label, limitation, and applicability.
+6. Extract short grounding quotes or exact snippets for high-impact claims before synthesis; do not output long quoted passages.
+7. Search for contradiction, failed replication, benchmark caveats, or later updates.
+8. Produce a concise synthesis with explicit confidence and gaps.
+9. If workflow changes are requested, propose concrete edits and the evidence supporting each edit.
 
 For deep work, keep an evidence matrix. Use `assets/evidence-matrix-template.md` as the output shape if the user asks for an artifact.
 
