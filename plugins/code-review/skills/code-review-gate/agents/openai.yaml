@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Review Gate"
+  short_description: "Review-only gate for personal code changes"
+  default_prompt: "Run a code review gate on my current changes."

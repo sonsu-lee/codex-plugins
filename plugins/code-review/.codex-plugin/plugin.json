@@ -1,0 +1,40 @@
+{
+  "name": "code-review",
+  "version": "0.1.0",
+  "description": "Primary personal code change review gates for scope fit, correctness, quality, conventions, regression risk, and architecture impact.",
+  "author": {
+    "name": "sonsu"
+  },
+  "homepage": "https://github.com/sonsu-lee/codex-plugins/tree/main/plugins/code-review",
+  "repository": "https://github.com/sonsu-lee/codex-plugins",
+  "license": "UNLICENSED",
+  "keywords": [
+    "code-review",
+    "review-gate",
+    "quality",
+    "regression",
+    "workflow"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Code Review",
+    "shortDescription": "Personal review gates for code changes before merge or commit.",
+    "longDescription": "The primary personal code review gate for deciding whether a local change, diff, branch, commit, or pull request is acceptable within the requested task scope. The plugin owns the final acceptance decision across scope fit, correctness, structural soundness, code quality, conventions, regression verification, and lightweight architecture impact. Built-in or Superpowers code review can be used as optional independent reviewer input when explicitly requested, but this gate calibrates and reports the final Pass, Conditional Pass, or Fail verdict. The review gate itself is read-only; explicitly requested follow-up edits, staging, commits, PR comments, or review-thread actions should be handled after the review by the appropriate implementation, Git, or GitHub workflow.",
+    "developerName": "sonsu",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "websiteURL": "https://github.com/sonsu-lee/codex-plugins/tree/main/plugins/code-review",
+    "privacyPolicyURL": "https://openai.com/policies/row-privacy-policy/",
+    "termsOfServiceURL": "https://openai.com/policies/row-terms-of-use/",
+    "defaultPrompt": [
+      "Run a code review gate on my current changes.",
+      "Review this diff before merge.",
+      "Check whether this change is ready to accept."
+    ],
+    "brandColor": "#475569",
+    "screenshots": []
+  }
+}
