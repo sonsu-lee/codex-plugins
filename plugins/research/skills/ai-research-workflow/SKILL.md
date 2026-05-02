@@ -68,6 +68,7 @@ Default to free-first research:
 Read `references/source-tiers.md` when the answer depends on source quality.
 Read `references/research-workflow-architecture.md` when designing, changing, or evaluating the research plugin workflow itself.
 Read `references/research-concepts.md` when designing research workflows, improving report quality, choosing verification stages, or mapping academic research patterns into the plugin.
+Read `references/citation-source-verification.md` when verifying citations, source URLs, DOI/arXiv/OpenReview/PubMed identifiers, bibliographic metadata, or report source support.
 Read `references/exa-playbook.md` when Exa is available or the task involves literature discovery.
 Read `references/ai-research-domains.md` for useful AI research source domains.
 Read `references/verification-gates.md` for claim checks, support labels, and contradiction handling.
