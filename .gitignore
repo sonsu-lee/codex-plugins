@@ -1,3 +1,12 @@
 .venv/
 __pycache__/
 *.py[cod]
+
+# Local research artifacts generated while developing the research plugin.
+research/reports/
+
+# Local tool and OS noise.
+.DS_Store
+.env
+.env.*
+!.env.example
