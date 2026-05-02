@@ -1,0 +1,40 @@
+{
+  "name": "architecture-review",
+  "version": "0.1.0",
+  "description": "Context-aware architecture red-team reviews with optional independent-pass judgment and quality gates.",
+  "author": {
+    "name": "sonsu"
+  },
+  "homepage": "https://github.com/sonsu-lee/codex-plugins/tree/main/plugins/architecture-review",
+  "repository": "https://github.com/sonsu-lee/codex-plugins",
+  "license": "UNLICENSED",
+  "keywords": [
+    "architecture",
+    "design-review",
+    "red-team",
+    "systems",
+    "workflow"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Architecture Review",
+    "shortDescription": "Architecture red-team reviews with quality gates.",
+    "longDescription": "A personal architecture review workflow that reconstructs design intent, classifies the system context, compares the proposal against context-appropriate reference architecture, and then attacks contradictions, unjustified deviations, hidden assumptions, missing invariants, and real-world failure modes across frontend, backend, infrastructure, data, security, product, and operations. Substantial reviews end with an architecture quality gate, and strict reviews can separate baseline, red-team, and gate judgment into independent passes when explicitly requested and supported by the active environment.",
+    "developerName": "sonsu",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "websiteURL": "https://github.com/sonsu-lee/codex-plugins/tree/main/plugins/architecture-review",
+    "privacyPolicyURL": "https://openai.com/policies/row-privacy-policy/",
+    "termsOfServiceURL": "https://openai.com/policies/row-terms-of-use/",
+    "defaultPrompt": [
+      "Red-team this architecture from first principles.",
+      "Run a strict architecture gate on this design.",
+      "Find contradictions in this architecture."
+    ],
+    "brandColor": "#7F1D1D",
+    "screenshots": []
+  }
+}

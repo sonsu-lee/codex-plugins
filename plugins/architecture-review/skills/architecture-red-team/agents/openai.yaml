@@ -1,0 +1,4 @@
+interface:
+  display_name: "Architecture Red Team"
+  short_description: "Context-aware architecture red-team review"
+  default_prompt: "Red-team this architecture from first principles."
