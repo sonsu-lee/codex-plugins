@@ -22,6 +22,8 @@ Any hard fail blocks a confident conclusion regardless of numeric score:
 - No canonical source for the main claim.
 - A key claim is supported only by a search summary, snippet, social post, or uncited blog.
 - A high-impact factual claim has no source-specific grounding quote, exact snippet, table, figure, code reference, or explicit metadata field.
+- A scholarly citation that affects the conclusion could not be traced to a real paper, DOI, arXiv/OpenReview/proceedings page, publisher page, or trusted scholarly index.
+- A citation is attached to a claim that the cited source does not actually support.
 - The source is stale for a time-sensitive claim and no date/version caveat is stated.
 - The task asks for official guidance, but no official source was checked.
 - The task asks for academic evidence, but no primary paper/preprint/proceedings page or trusted scholarly index was checked.
@@ -99,6 +101,8 @@ Checks:
 - Major claims appear in a claim ledger.
 - Each major claim has a support label.
 - High-impact claims have a grounding quote, exact snippet, metadata field, code reference, table, or figure.
+- Scholarly citations that affect conclusions have existence checks, such as DOI, arXiv ID, proceedings page, publisher page, Crossref/OpenAlex/Semantic Scholar metadata, or an inspected paper page.
+- Citation placement matches claim support; citations that only support background context are not used as support for stronger claims.
 - Unsupported or overbroad claims are retracted or downgraded.
 
 Rollback target: `claim-ground`
@@ -156,6 +160,7 @@ Checks:
 - The report has enough narrative analysis for the selected mode.
 - The first screen contains a direct answer and major conclusions.
 - The report uses sources to support analysis, not as a bare bibliography.
+- Important citations are near the claims they support, and source lists do not substitute for claim-level grounding.
 - The report answers the likely questions of a skeptical but fair reader.
 - The report includes risks, limitations, and execution recommendations when relevant.
 - The report does not expose internal validation tables by default.

@@ -30,6 +30,18 @@ For high-impact factual claims, extract a short grounding quote or exact snippet
 
 Use quotes internally to anchor analysis. In final answers, keep quoted text short and prefer citation links plus paraphrase unless the user explicitly asks for exact excerpts.
 
+## Citation And Source Verification
+
+For scholarly, benchmark, official-guidance, legal, medical, financial, or workflow-changing claims, verify both existence and support:
+
+- Existence: the source can be traced to a canonical URL, DOI, arXiv ID, OpenReview/proceedings page, publisher page, official API response, repository, or trusted scholarly index record.
+- Metadata: title, authors, date/year, venue/version, and identifier match the claim closely enough for the use.
+- Support: the source actually supports the sentence it is attached to, not only the broad topic.
+- Freshness: current claims use current docs, release notes, policy pages, or recent metadata.
+- Access path: record whether support came from full text, abstract, metadata, changelog, code, table, figure, or API response.
+
+If bibliographic metadata exists but the source was not inspected, label the related claim `partially-supported` unless metadata alone is enough for the claim.
+
 ## Quality Checks
 
 Ask:
@@ -42,6 +54,7 @@ Ask:
 - Is there code, data, or a harness that can be inspected?
 - Are later updates, errata, or replication attempts available?
 - Can each final claim be traced to a source, quote, snippet, or explicit absence of evidence?
+- Could the citation be fabricated, misattributed, stale, or attached to a stronger claim than it supports?
 
 ## Contradiction Search
 
@@ -73,4 +86,6 @@ Before final synthesis, run a compact accuracy pass:
 - Separate evidence from interpretation.
 - Mark uncertainty directly instead of filling gaps from general knowledge.
 - Check whether the retrieval failed, the source lacks the needed fact, or the synthesis overreached.
+- Check whether cited sources exist and whether their metadata matches the report.
+- Move, rewrite, downgrade, or remove citations that do not support the attached sentence.
 - For workflow recommendations, state the validation method that would confirm the change is useful.

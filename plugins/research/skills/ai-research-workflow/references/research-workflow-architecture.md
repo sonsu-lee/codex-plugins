@@ -8,11 +8,11 @@ Use this reference when creating, changing, or evaluating the research plugin wo
 | --- | --- | --- |
 | `.codex-plugin/plugin.json` | install metadata, bundled component paths, starter prompts | research logic, source policy, report quality |
 | `SKILL.md` | trigger scope, mode selection, stage contract, output contract | long rubrics, provider-specific docs |
-| `references/` | source tiers, quality gates, report standards, provider playbooks | final reports or one-off research notes |
+| `references/` | source tiers, quality gates, report standards, provider playbooks, research concept mappings | final reports or one-off research notes |
 | `.mcp.json` / MCP config | retrieval and fetch tools | conclusion, confidence, synthesis |
 | `.codex/agents/*.toml` | bounded read-only lane roles | final authority, recursive delegation by default |
 | `AGENTS.md` | always-on working agreements | detailed research algorithms |
-| hooks/scripts | deterministic checks and repeatable linting | judgement-heavy source evaluation |
+| hooks/scripts | deterministic checks, citation/source verification, and repeatable linting | judgement-heavy source evaluation |
 
 ## Canonical Workflow
 
@@ -20,7 +20,7 @@ Use this reference when creating, changing, or evaluating the research plugin wo
 2. `lane-select`: required evidence lanes and source preferences.
 3. `retrieve`: candidate discovery from free/canonical sources first.
 4. `source-fetch`: original documents, official docs, papers, repos, or API pages.
-5. `claim-ground`: support labels and grounding for major claims.
+5. `claim-ground`: support labels, bibliographic existence checks, and grounding for major claims.
 6. `contradiction-check`: conflicts, caveats, later updates, benchmark limits.
 7. `synthesize`: decision logic and confidence.
 8. `workflow-integrate`: target surface, cost, risk, validation, rollback.
@@ -63,6 +63,8 @@ Before treating a workflow change as adopted:
 
 - run at least one sample for the affected mode
 - check that canonical sources appear for main claims
+- check that scholarly citations affecting conclusions can be traced to real sources
+- check that citations support the nearby claims they are attached to
 - check that final reports do not expose internal tables by default
 - check that recommendations include target surface, cost, validation, and rollback
 - keep a small regression set for `quick-fact`, `official-guidance-review`, `comparison`, `workflow-update-review`, and `deep-research`

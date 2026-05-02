@@ -67,6 +67,7 @@ Default to free-first research:
 
 Read `references/source-tiers.md` when the answer depends on source quality.
 Read `references/research-workflow-architecture.md` when designing, changing, or evaluating the research plugin workflow itself.
+Read `references/research-concepts.md` when designing research workflows, improving report quality, choosing verification stages, or mapping academic research patterns into the plugin.
 Read `references/exa-playbook.md` when Exa is available or the task involves literature discovery.
 Read `references/ai-research-domains.md` for useful AI research source domains.
 Read `references/verification-gates.md` for claim checks, support labels, and contradiction handling.
@@ -84,8 +85,8 @@ Use explicit stages so failures can roll back to the right place:
 1. `plan`: restate the objective, classify the mode, set scope, exclusions, time window, and success criteria.
 2. `lane-select`: define the evidence lanes needed by the question, each with source preferences and reader-sufficiency targets from `references/report-substance-standards.md`.
 3. `retrieve`: retrieve candidates from official free sources, Exa free-tier discovery, GitHub, scholarly indexes, and web search as appropriate.
-4. `source-fetch`: fetch or inspect original sources for all claims that affect the conclusion.
-5. `claim-ground`: build a compact claim ledger; each major claim needs source, support label, grounding, limitation, and applicability.
+4. `source-fetch`: fetch or inspect original sources for all claims that affect the conclusion. Do not stop at search snippets, provider summaries, or bibliographic guesses.
+5. `claim-ground`: build a compact claim ledger; each major claim needs source, support label, grounding, limitation, and applicability. For scholarly claims, verify that cited papers or DOIs exist before relying on them.
 6. `contradiction-check`: search for contradictions, failed replication, benchmark caveats, later updates, or scope conflicts.
 7. `synthesize`: combine evidence into conclusions, not source-by-source summaries.
 8. `workflow-integrate`: if workflow changes are requested, map findings to skill, plugin, MCP, AGENTS.md, custom agent, hook, automation, config, or no change.
@@ -106,6 +107,7 @@ At the end of a research task, create a Markdown report file.
 - Default report prose to Korean unless the user asks for another language.
 - Start the report with the direct answer and major conclusions, then analysis, risks/limits, execution recommendations, and sources.
 - For `comparison`, `workflow-update-review`, `literature-scan`, and `deep-research`, meet the relevant substance standard in `references/report-substance-standards.md`. An under-argued report is a failed report even if it has citations.
+- Treat citations as claim support, not decoration. If a citation only supports the general topic but not the sentence it is attached to, rewrite the sentence, move the citation, or downgrade the claim.
 - Keep internal validation material out of the final report. `Claim ledger`, `Evidence Matrix`, `Quality Gate Results`, `Workflow Implications`, and rollback tables are working artifacts, not default report sections.
 - Keep the chat response short: core conclusion, confidence, report path, and one recommended next action.
 - Do not write a report for tiny `quick-fact` answers unless the user asked for a saved artifact.
