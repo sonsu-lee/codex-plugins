@@ -35,6 +35,8 @@ Hard fail action:
 2. perform one bounded correction pass
 3. if still failing, mark the conclusion `low confidence` and state the unresolved gap
 
+Do not default to more search for every failure. Missing evidence rolls back to retrieval; weak argument rolls back to synthesis; missing validation or rollback rolls back to workflow integration; internal validation artifacts in the user report roll back to report writing.
+
 ## Score Scale
 
 Score each gate from 0 to 3:
@@ -75,6 +77,8 @@ Checks:
 - Exa/native search is used only as discovery unless the source itself is canonical.
 
 Rollback target: `retrieve`
+
+Use `source-fetch` instead when candidates exist but the original source, exact metadata, or grounding snippet has not been inspected.
 
 ### 3. Coverage Gate
 
@@ -158,6 +162,8 @@ Checks:
 - The report is not just a comparison table or source list for a broad research request.
 
 Rollback target: `report-write`
+
+Use `synthesize` before `report-write` when the report is well formatted but lacks decision logic, tradeoff analysis, or enough argument for the selected mode.
 
 ## Correction Pass Limits
 

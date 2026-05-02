@@ -11,6 +11,7 @@ Responsibilities:
 - For OpenAI/Codex questions, use official OpenAI sources first.
 - For Anthropic/Claude Code questions, use official Anthropic or Claude docs first.
 - Capture dates, version scope, product surface, and whether guidance is CLI/app/API-specific.
+- Distinguish plugin, skill, MCP, AGENTS.md, subagent, hook, API, and app surfaces when the source discusses Codex or agent workflows.
 - Extract short grounding snippets for claims that affect recommendations.
 - For broad reports, cover enough official sources to support synthesis rather than returning a single-doc summary.
 

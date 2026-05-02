@@ -14,6 +14,16 @@ Codex only spawns subagents when explicitly asked. Do not use these agents for r
 | `source_evaluator` | Adversarial quality gate pass, source tier review, unsupported claim detection | Evidence has not been gathered yet |
 | `workflow_translator` | Converting verified findings into skill/plugin/agent/config/process recommendations | Evidence is weak or still disputed |
 
+## Activation Rule
+
+Use agent orchestration only when the work is broad enough to need it:
+
+- the selected mode is `deep-research`, `workflow-update-review`, `literature-scan`, or a broad `comparison`
+- at least two independent evidence lanes are needed
+- the user explicitly asks for deep, parallel, delegated, or agent-group work, or the active runtime instructions allow delegation
+
+Do not use agents for narrow official-doc checks or quick facts.
+
 ## Default Topology
 
 For `deep-research`:
@@ -49,6 +59,7 @@ For `comparison`:
 - Require canonical sources for final evidence.
 - Require each lane to return gaps and contradictions, not just positive evidence.
 - Require each lane to explain how its evidence changes the final decision or why it should not affect the decision.
+- Require each lane to return decision impact, not a standalone report.
 - Do not let subagents recursively spawn more agents unless the user explicitly asks for recursive delegation.
 
 ## Lane Prompt Template
@@ -80,3 +91,5 @@ The main thread owns:
 - report file creation
 
 Subagent outputs are evidence inputs, not final conclusions.
+
+If subagent outputs conflict, prefer the source with the higher tier, newer applicable date, narrower product scope, and clearer methodology. If the conflict still matters, represent it in the synthesis and lower confidence.

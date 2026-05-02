@@ -48,6 +48,20 @@ Adequate when the report connects evidence to concrete workflow changes and expl
 
 Adequate when the report covers all evidence lanes naturally required by the question, resolves or states contradictions, explains the decision logic, and gives actionable recommendations. It should feel like a decision memo, not a source digest.
 
+### Workflow Architecture Reports
+
+Adequate when the report distinguishes these surfaces and does not collapse them into one prompt:
+
+- plugin manifest and install metadata
+- skill trigger and workflow contract
+- references and progressive disclosure
+- MCP or retrieval provider configuration
+- custom agents and orchestration rules
+- AGENTS.md or global instructions
+- hooks, scripts, or evals for deterministic validation
+
+The report must explain which surface should change, why that surface is appropriate, how to validate the change, and when to roll it back.
+
 ## Evidence Lane Expectations
 
 Pick lanes based on the question. Do not create irrelevant lanes to look comprehensive.
@@ -80,6 +94,8 @@ For workflow-changing reports, each recommendation must state:
 - cost or operational burden
 - validation signal
 - rollback or stop condition
+
+For research plugin changes, also state whether the change affects retrieval, verification, synthesis, reporting, orchestration, or regression checks.
 
 ## Anti-Shallow Checks
 

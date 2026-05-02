@@ -1,6 +1,6 @@
 ---
 name: ai-research-workflow
-description: Use for AI/ML research tasks that require recent papers, official model or coding-agent guidance, benchmark interpretation, source quality checks, or translating evidence into local workflow/plugin/agent recommendations. Especially relevant for Exa-backed literature scans, OpenAI/Anthropic guidance reviews, and evidence-backed workflow updates.
+description: Use for AI/ML research tasks that require recent papers, official model or coding-agent guidance, benchmark interpretation, source quality checks, or translating evidence into local workflow/plugin/agent recommendations. Especially relevant for free-first literature scans, OpenAI/Anthropic guidance reviews, and evidence-backed workflow updates.
 ---
 
 # AI Research Workflow
@@ -24,6 +24,8 @@ The workflow owns four things:
 2. verify important claims against original material
 3. separate strong evidence from weak signals
 4. translate findings into practical workflow recommendations
+
+This skill is the reasoning, verification, and report layer. MCP servers and search providers are retrieval layers only. Do not let a search provider summary, ranking, or generated answer define the conclusion.
 
 Never treat a search result summary, social post, or blog paraphrase as final evidence. Fetch or inspect the original source for any claim that affects the conclusion.
 
@@ -64,6 +66,7 @@ Default to free-first research:
 - Final evidence must come from canonical source pages, official APIs, or original documents, not from Exa summaries.
 
 Read `references/source-tiers.md` when the answer depends on source quality.
+Read `references/research-workflow-architecture.md` when designing, changing, or evaluating the research plugin workflow itself.
 Read `references/exa-playbook.md` when Exa is available or the task involves literature discovery.
 Read `references/ai-research-domains.md` for useful AI research source domains.
 Read `references/verification-gates.md` for claim checks, support labels, and contradiction handling.
@@ -76,18 +79,20 @@ Read `references/workflow-integration.md` before recommending changes to local w
 
 ## Default Procedure
 
-1. Restate the research objective and classify the mode.
-2. Define the evidence lanes needed by the question, each with source preferences and reader-sufficiency targets from `references/report-substance-standards.md`.
-3. Retrieve candidates from official free sources, Exa free-tier discovery, GitHub, and web search as appropriate.
-4. Fetch original sources for all important claims.
-5. Build a claim ledger: each major claim needs source, support label, limitation, and applicability.
-6. Extract short grounding quotes or exact snippets for high-impact claims before synthesis; do not output long quoted passages.
-7. Search for contradiction, failed replication, benchmark caveats, or later updates.
-8. If subagents were used, merge lane outputs and resolve conflicts before quality gates.
-9. Run the quality gates. If a hard fail or gate failure occurs, roll back to the named stage and make one bounded correction pass before synthesis.
-10. Produce a substantive synthesis with explicit confidence and gaps. For report-producing modes, do not stop until the report explains the reasoning, tradeoffs, limits, and practical implications well enough for an informed reader to evaluate it.
-11. If workflow changes are requested, propose concrete edits and the evidence supporting each edit.
-12. Write a reader-facing Markdown research report unless the user explicitly asks for chat-only output. Do not expose internal claim ledgers, evidence matrices, quality gate tables, rollback notes, or raw subagent work in the final report unless the user explicitly asks for an audit/debug appendix.
+Use explicit stages so failures can roll back to the right place:
+
+1. `plan`: restate the objective, classify the mode, set scope, exclusions, time window, and success criteria.
+2. `lane-select`: define the evidence lanes needed by the question, each with source preferences and reader-sufficiency targets from `references/report-substance-standards.md`.
+3. `retrieve`: retrieve candidates from official free sources, Exa free-tier discovery, GitHub, scholarly indexes, and web search as appropriate.
+4. `source-fetch`: fetch or inspect original sources for all claims that affect the conclusion.
+5. `claim-ground`: build a compact claim ledger; each major claim needs source, support label, grounding, limitation, and applicability.
+6. `contradiction-check`: search for contradictions, failed replication, benchmark caveats, later updates, or scope conflicts.
+7. `synthesize`: combine evidence into conclusions, not source-by-source summaries.
+8. `workflow-integrate`: if workflow changes are requested, map findings to skill, plugin, MCP, AGENTS.md, custom agent, hook, automation, config, or no change.
+9. `report-write`: write the reader-facing Markdown report unless the user explicitly asks for chat-only output.
+10. `validate`: run quality gates and static report checks. If a hard fail occurs, roll back only to the named failed stage and make a bounded correction pass.
+
+Do not route every failure back to `retrieve`. A weak conclusion usually needs `synthesize`; missing rollback/validation details need `workflow-integrate`; internal tables in the report need `report-write`.
 
 For deep work, keep an evidence matrix internally. Use `assets/evidence-matrix-template.md` only if the user explicitly asks for an evidence artifact or audit appendix.
 
@@ -125,6 +130,8 @@ Project-scoped custom agents are available for research workflows:
 - `workflow_translator`
 
 The coordinating agent keeps the research question, source-tier rules, conflict resolution, and final synthesis.
+
+For report-producing research, the main thread or `research_head` owns final synthesis and report creation. Subagents return evidence inputs, gaps, and decision impact; they do not write the final report or decide confidence by themselves.
 
 ## Output Contract
 

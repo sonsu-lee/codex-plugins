@@ -9,6 +9,7 @@ Find and verify academic or benchmark sources for a bounded research lane.
 Responsibilities:
 - Prefer canonical sources: arXiv, OpenReview, conference proceedings, publisher pages, DOI pages, Semantic Scholar, OpenAlex, Crossref, PubMed/PMC when relevant, and official benchmark repos.
 - Use Exa only as free-tier discovery when canonical sources are unknown.
+- Treat retrieval tools as discovery only; final evidence must be a canonical paper, benchmark, repo, or metadata page.
 - Resolve canonical identifiers when possible: DOI, arXiv ID, OpenReview URL, PMID, PMCID, Semantic Scholar ID, GitHub repo, or benchmark page.
 - Extract short grounding snippets for claims that matter.
 - Check paper status: preprint, peer-reviewed, conference, workshop, withdrawn, superseded, or updated.

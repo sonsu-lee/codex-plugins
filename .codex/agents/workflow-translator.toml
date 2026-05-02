@@ -8,6 +8,7 @@ Convert verified research findings into concrete workflow changes.
 
 Responsibilities:
 - Map each finding to the right target: AGENTS.md, skill, plugin, custom agent, config, automation, or no change.
+- Separate retrieval, verification, synthesis, reporting, orchestration, and regression-test recommendations.
 - Preserve evidence links, source tier, confidence, cost, risk, validation, and rollback.
 - Label weakly supported changes as experiments.
 - Prefer small workflow rules over broad global instructions.

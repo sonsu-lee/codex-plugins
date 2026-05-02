@@ -1,12 +1,8 @@
 {
-  "mcpServers": {
+  "mcp_servers": {
     "exa": {
       "command": "npx",
-      "args": [
-        "-y",
-        "mcp-remote",
-        "https://mcp.exa.ai/mcp"
-      ]
+      "args": ["-y", "mcp-remote", "https://mcp.exa.ai/mcp"]
     }
   }
 }

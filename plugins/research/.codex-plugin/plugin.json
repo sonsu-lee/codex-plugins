@@ -1,7 +1,7 @@
 {
   "name": "research",
   "version": "0.1.0",
-  "description": "Evidence-first AI research workflows for papers, official guidance, benchmarks, and workflow updates.",
+  "description": "Evidence-first research workflows for AI papers, official guidance, benchmarks, and workflow updates.",
   "author": {
     "name": "sonsu"
   },
@@ -20,8 +20,8 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Research",
-    "shortDescription": "AI research with source tiers, Exa-first retrieval, and verification gates.",
-    "longDescription": "Local research workflows for investigating AI papers, official model and tooling guidance, benchmarks, implementations, and community signals. The plugin emphasizes source-tiering, original-source verification, contradiction checks, and converting evidence into actionable workflow recommendations.",
+    "shortDescription": "AI research with free-first retrieval, source tiers, and verification gates.",
+    "longDescription": "Local research workflows for investigating AI papers, official model and tooling guidance, benchmarks, implementations, and community signals. The plugin treats MCP providers as retrieval tools and emphasizes source-tiering, original-source verification, contradiction checks, report adequacy, and converting evidence into actionable workflow recommendations.",
     "developerName": "sonsu",
     "category": "Research",
     "capabilities": [

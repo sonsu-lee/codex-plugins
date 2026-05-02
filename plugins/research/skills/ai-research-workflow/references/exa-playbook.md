@@ -4,7 +4,7 @@ Use Exa as a free-tier discovery layer, not as the final judge.
 
 ## Default Mode
 
-The research plugin defaults to Exa's hosted MCP free path:
+The research plugin may bundle Exa's hosted MCP free path as an optional discovery provider:
 
 ```json
 {
@@ -14,6 +14,8 @@ The research plugin defaults to Exa's hosted MCP free path:
 ```
 
 This intentionally does not read `EXA_API_KEY` from the environment and does not attach account-backed headers. Do not switch to a key-backed Exa server unless the user explicitly asks for paid or account-backed usage.
+
+Exa is not the default authority. Prefer official docs, canonical scholarly pages, and primary repos when the target source is already known.
 
 ## When Exa Helps
 
