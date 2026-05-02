@@ -8,6 +8,7 @@ import json
 import re
 import socket
 import sys
+import xml.etree.ElementTree as ET
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -215,27 +216,24 @@ def crossref_url(doi):
     return "https://api.crossref.org/works/" + urllib.parse.quote(doi, safe="")
 
 
+def datacite_url(doi):
+    return "https://api.datacite.org/dois/" + urllib.parse.quote(doi, safe="")
+
+
 def verify_doi(source, transport=None, timeout=10):
     transport = transport or UrllibTransport()
     doi = source.identifier or normalize_doi(source.raw)
-    url = crossref_url(doi)
-    response = transport.request(
-        url,
+    crossref_response = transport.request(
+        crossref_url(doi),
         method="GET",
         headers={"Accept": "application/json", "User-Agent": "codex-research-source-verifier/0.1"},
         timeout=timeout,
     )
-    if response.get("status") != 200:
-        return {
-            "source": source.to_dict(),
-            "status": "not_found",
-            "provider": "crossref",
-            "http_status": response.get("status"),
-            "error": response.get("error"),
-        }
+    if crossref_response.get("status") != 200:
+        return verify_datacite_doi(source, transport=transport, timeout=timeout, previous_response=crossref_response)
 
     try:
-        payload = json.loads(response.get("body", b"{}").decode("utf-8"))
+        payload = json.loads(crossref_response.get("body", b"{}").decode("utf-8"))
     except json.JSONDecodeError as exc:
         return {
             "source": source.to_dict(),
@@ -245,13 +243,51 @@ def verify_doi(source, transport=None, timeout=10):
         }
 
     metadata = normalize_crossref_metadata(payload.get("message", {}))
-    return {
+    return result_with_metadata_match(source, {
         "source": source.to_dict(),
         "status": "ok",
         "provider": "crossref",
         "metadata": metadata,
-        "match": score_metadata_match(source, metadata),
-    }
+    })
+
+
+def verify_datacite_doi(source, transport=None, timeout=10, previous_response=None):
+    transport = transport or UrllibTransport()
+    doi = source.identifier or normalize_doi(source.raw)
+    response = transport.request(
+        datacite_url(doi),
+        method="GET",
+        headers={"Accept": "application/vnd.api+json", "User-Agent": "codex-research-source-verifier/0.1"},
+        timeout=timeout,
+    )
+    if response.get("status") != 200:
+        return {
+            "source": source.to_dict(),
+            "status": "not_found",
+            "provider": "datacite",
+            "http_status": response.get("status"),
+            "error": response.get("error"),
+            "previous_provider": "crossref" if previous_response else None,
+            "previous_http_status": previous_response.get("status") if previous_response else None,
+        }
+
+    try:
+        payload = json.loads(response.get("body", b"{}").decode("utf-8"))
+    except json.JSONDecodeError as exc:
+        return {
+            "source": source.to_dict(),
+            "status": "failed",
+            "provider": "datacite",
+            "reason": f"invalid_json: {exc}",
+        }
+
+    metadata = normalize_datacite_metadata(((payload.get("data") or {}).get("attributes")) or {})
+    return result_with_metadata_match(source, {
+        "source": source.to_dict(),
+        "status": "ok",
+        "provider": "datacite",
+        "metadata": metadata,
+    })
 
 
 def normalize_crossref_metadata(message):
@@ -274,6 +310,31 @@ def normalize_crossref_metadata(message):
     }
 
 
+def normalize_datacite_metadata(attributes):
+    title = ""
+    titles = attributes.get("titles") or []
+    if titles:
+        title = titles[0].get("title", "")
+
+    authors = []
+    for creator in attributes.get("creators", []) or []:
+        name = creator.get("name")
+        if not name:
+            name = " ".join(part for part in [creator.get("givenName"), creator.get("familyName")] if part)
+        if name:
+            authors.append(name)
+
+    return {
+        "doi": normalize_doi(attributes.get("doi", "")) if attributes.get("doi") else None,
+        "title": title,
+        "authors": authors,
+        "year": attributes.get("publicationYear"),
+        "container": attributes.get("publisher", ""),
+        "url": attributes.get("url"),
+        "type": ((attributes.get("types") or {}).get("resourceTypeGeneral")),
+    }
+
+
 def first(value):
     if isinstance(value, list) and value:
         return value[0]
@@ -290,6 +351,157 @@ def extract_crossref_year(message):
     return None
 
 
+def arxiv_api_url(arxiv_id):
+    return "https://export.arxiv.org/api/query?id_list=" + urllib.parse.quote(arxiv_id, safe="")
+
+
+def verify_arxiv(source, transport=None, timeout=10):
+    transport = transport or UrllibTransport()
+    arxiv_id = source.identifier or extract_arxiv_id(source.raw)
+    if not arxiv_id:
+        return {"source": source.to_dict(), "status": "not_found", "provider": "arxiv", "reason": "missing_id"}
+
+    response = transport.request(
+        arxiv_api_url(arxiv_id),
+        method="GET",
+        headers={"Accept": "application/atom+xml", "User-Agent": "codex-research-source-verifier/0.1"},
+        timeout=timeout,
+    )
+    if response.get("status") != 200:
+        return {
+            "source": source.to_dict(),
+            "status": "not_found",
+            "provider": "arxiv",
+            "http_status": response.get("status"),
+            "error": response.get("error"),
+        }
+
+    try:
+        root = ET.fromstring(response.get("body", b""))
+    except ET.ParseError as exc:
+        return {
+            "source": source.to_dict(),
+            "status": "failed",
+            "provider": "arxiv",
+            "reason": f"invalid_xml: {exc}",
+        }
+
+    metadata = normalize_arxiv_metadata(root)
+    if not metadata.get("title"):
+        return {"source": source.to_dict(), "status": "not_found", "provider": "arxiv"}
+    return result_with_metadata_match(source, {
+        "source": source.to_dict(),
+        "status": "ok",
+        "provider": "arxiv",
+        "metadata": metadata,
+    })
+
+
+def normalize_arxiv_metadata(root):
+    ns = {"atom": "http://www.w3.org/2005/Atom", "arxiv": "http://arxiv.org/schemas/atom"}
+    entry = root.find("atom:entry", ns)
+    if entry is None:
+        return {}
+
+    title = text_or_empty(entry.find("atom:title", ns))
+    authors = [text_or_empty(author.find("atom:name", ns)) for author in entry.findall("atom:author", ns)]
+    published = text_or_empty(entry.find("atom:published", ns))
+    arxiv_url = text_or_empty(entry.find("atom:id", ns))
+    doi = text_or_empty(entry.find("arxiv:doi", ns))
+    return {
+        "doi": normalize_doi(doi) if doi else None,
+        "title": " ".join(title.split()),
+        "authors": [author for author in authors if author],
+        "year": extract_year(published),
+        "container": "arXiv",
+        "url": arxiv_url.replace("http://", "https://") if arxiv_url else None,
+        "type": "preprint",
+    }
+
+
+def text_or_empty(element):
+    if element is None or element.text is None:
+        return ""
+    return element.text.strip()
+
+
+def pubmed_summary_url(pmid):
+    return (
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
+        + "?db=pubmed&id="
+        + urllib.parse.quote(pmid, safe="")
+        + "&retmode=json"
+    )
+
+
+def verify_pubmed(source, transport=None, timeout=10):
+    transport = transport or UrllibTransport()
+    pmid = source.identifier
+    if not pmid:
+        return {"source": source.to_dict(), "status": "not_found", "provider": "pubmed", "reason": "missing_pmid"}
+
+    response = transport.request(
+        pubmed_summary_url(pmid),
+        method="GET",
+        headers={"Accept": "application/json", "User-Agent": "codex-research-source-verifier/0.1"},
+        timeout=timeout,
+    )
+    if response.get("status") != 200:
+        return {
+            "source": source.to_dict(),
+            "status": "not_found",
+            "provider": "pubmed",
+            "http_status": response.get("status"),
+            "error": response.get("error"),
+        }
+
+    try:
+        payload = json.loads(response.get("body", b"{}").decode("utf-8"))
+    except json.JSONDecodeError as exc:
+        return {
+            "source": source.to_dict(),
+            "status": "failed",
+            "provider": "pubmed",
+            "reason": f"invalid_json: {exc}",
+        }
+
+    record = ((payload.get("result") or {}).get(pmid)) or {}
+    if not record:
+        return {"source": source.to_dict(), "status": "not_found", "provider": "pubmed"}
+
+    metadata = normalize_pubmed_metadata(pmid, record)
+    return result_with_metadata_match(source, {
+        "source": source.to_dict(),
+        "status": "ok",
+        "provider": "pubmed",
+        "metadata": metadata,
+    })
+
+
+def normalize_pubmed_metadata(pmid, record):
+    doi = None
+    for article_id in record.get("articleids", []) or []:
+        if article_id.get("idtype") == "doi":
+            doi = article_id.get("value")
+            break
+    return {
+        "doi": normalize_doi(doi) if doi else None,
+        "title": record.get("title", ""),
+        "authors": [author.get("name") for author in record.get("authors", []) or [] if author.get("name")],
+        "year": extract_year(record.get("pubdate", "")),
+        "container": record.get("source", ""),
+        "url": f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/",
+        "type": "article",
+    }
+
+
+def extract_year(value):
+    match = re.search(r"\b(1[5-9]\d{2}|20\d{2}|21\d{2})\b", value or "")
+    if not match:
+        return None
+    return int(match.group(1))
+
+
 def normalize_text(value):
     value = (value or "").lower()
     value = re.sub(r"[^a-z0-9]+", " ", value)
@@ -298,6 +510,15 @@ def normalize_text(value):
 
 def title_similarity(left, right):
     return difflib.SequenceMatcher(None, normalize_text(left), normalize_text(right)).ratio()
+
+
+def result_with_metadata_match(source, result):
+    metadata = result.get("metadata", {})
+    match = score_metadata_match(source, metadata)
+    result["match"] = match
+    if match["status"] == "mismatch":
+        result["status"] = "metadata_mismatch"
+    return result
 
 
 def score_metadata_match(source, metadata):
@@ -325,6 +546,10 @@ def verify_source(source, transport=None, offline=False):
         return {"source": source.to_dict(), "status": "not_checked", "reason": "offline"}
     if source.kind == "doi":
         return verify_doi(source, transport=transport)
+    if source.kind == "arxiv":
+        return verify_arxiv(source, transport=transport)
+    if source.kind == "pubmed":
+        return verify_pubmed(source, transport=transport)
     return verify_url(source, transport=transport)
 
 

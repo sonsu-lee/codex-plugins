@@ -1,5 +1,6 @@
 name = "official_guidance_scout"
 description = "Read-only scout for official OpenAI, Anthropic, model-lab, vendor, and tooling guidance relevant to AI workflows."
+# model intentionally inherits from the parent session; see the research plugin's agent-orchestration reference.
 model_reasoning_effort = "medium"
 sandbox_mode = "read-only"
 nickname_candidates = ["Official Scout", "Docs Scout", "Guidance Scout"]

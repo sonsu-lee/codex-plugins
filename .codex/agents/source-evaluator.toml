@@ -1,5 +1,6 @@
 name = "source_evaluator"
 description = "Adversarial source-quality evaluator for research evidence, claim grounding, contradiction checks, and quality gates."
+# model intentionally inherits from the parent session; see the research plugin's agent-orchestration reference.
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"
 nickname_candidates = ["Source Judge", "Gatekeeper", "Evidence Judge"]

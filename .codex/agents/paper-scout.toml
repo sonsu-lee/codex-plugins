@@ -1,5 +1,6 @@
 name = "paper_scout"
 description = "Read-only scout for AI papers, preprints, benchmark papers, canonical scholarly metadata, and implementation links."
+# model intentionally inherits from the parent session; see the research plugin's agent-orchestration reference.
 model_reasoning_effort = "medium"
 sandbox_mode = "read-only"
 nickname_candidates = ["Paper Scout", "Lit Scout", "Benchmark Scout"]

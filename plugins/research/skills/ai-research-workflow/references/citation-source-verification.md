@@ -34,6 +34,36 @@ Typical offline extraction:
 python3 plugins/research/skills/ai-research-workflow/scripts/verify_sources.py research/reports/report.md --offline --json /tmp/source-check.json
 ```
 
+Typical report-shape lint:
+
+```bash
+python3 plugins/research/skills/ai-research-workflow/scripts/lint_report.py research/reports/report.md --json /tmp/report-lint.json
+```
+
+`verify_sources.py` currently supports:
+
+- URL extraction and reachability checks with unsafe host blocking
+- DOI metadata through Crossref with DataCite fallback
+- arXiv metadata through the arXiv API
+- PubMed metadata through NCBI ESummary
+- OpenReview URL extraction and generic URL checks
+- title/year/author metadata scoring when expected metadata is provided programmatically
+
+`lint_report.py` currently supports:
+
+- required reader-facing section checks
+- blocking internal workbench headings such as claim ledgers, evidence matrices, quality gate tables, and rollback tables
+- source URL presence under `참고 출처`
+- validation/rollback language checks for `workflow-update-review` reports
+
+`lint_claim_source_ledger.py` currently supports internal claim-source ledger checks:
+
+- each `## Claim ...` entry has claim, reference, canonical URL, source tier, access path, grounding, support label, fit judgement, and limitations
+- canonical URLs use HTTP or HTTPS
+- support labels are constrained to `supported`, `partially_supported`, `unsupported`, `contradicted`, `uncertain`, `metadata_only`, or `not_checked`
+- access paths are constrained to concrete inspection surfaces such as `full_text`, `abstract`, `metadata`, `official_doc`, `code`, `changelog`, `table`, `figure`, `api_response`, `repository`, or `benchmark`
+- `metadata_only` support must still name the metadata field or record used as grounding
+
 Network verification should use polite provider behavior:
 
 - include a descriptive `User-Agent`
@@ -69,5 +99,6 @@ Network verification should use polite provider behavior:
 1. Start with URL, DOI, arXiv, and offline extraction.
 2. Add DataCite/OpenAlex/Semantic Scholar fallback adapters.
 3. Add report fixtures with known true and false citations.
-4. Add warning-only claim support checks for high-impact claims.
-5. Promote only low-risk deterministic failures to hard gates.
+4. Add claim-source ledger linting for report-producing modes.
+5. Add warning-only claim support checks for high-impact claims.
+6. Promote only low-risk deterministic failures to hard gates.

@@ -100,9 +100,11 @@ Checks:
 
 - Major claims appear in a claim ledger.
 - Each major claim has a support label.
+- Each major claim records a canonical URL, access path, and fit judgement.
 - High-impact claims have a grounding quote, exact snippet, metadata field, code reference, table, or figure.
 - Scholarly citations that affect conclusions have existence checks, such as DOI, arXiv ID, proceedings page, publisher page, Crossref/OpenAlex/Semantic Scholar metadata, or an inspected paper page.
 - Citation placement matches claim support; citations that only support background context are not used as support for stronger claims.
+- The claim-source ledger passes `scripts/lint_claim_source_ledger.py` when a ledger artifact is written.
 - Unsupported or overbroad claims are retracted or downgraded.
 
 Rollback target: `claim-ground`
@@ -165,6 +167,7 @@ Checks:
 - The report includes risks, limitations, and execution recommendations when relevant.
 - The report does not expose internal validation tables by default.
 - The report is not just a comparison table or source list for a broad research request.
+- Local static checks pass when available: `scripts/lint_report.py <report.md>` and `scripts/verify_sources.py <report.md> --offline`.
 
 Rollback target: `report-write`
 

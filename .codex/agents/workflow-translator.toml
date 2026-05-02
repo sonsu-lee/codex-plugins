@@ -1,5 +1,6 @@
 name = "workflow_translator"
 description = "Read-only translator from research findings into concrete prompt, skill, plugin, agent, AGENTS.md, config, or process recommendations."
+# model intentionally inherits from the parent session; see the research plugin's agent-orchestration reference.
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"
 nickname_candidates = ["Workflow Mapper", "Process Translator", "Rule Mapper"]

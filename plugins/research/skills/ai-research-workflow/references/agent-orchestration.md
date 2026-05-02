@@ -14,6 +14,35 @@ Codex only spawns subagents when explicitly asked. Do not use these agents for r
 | `source_evaluator` | Adversarial quality gate pass, source tier review, unsupported claim detection | Evidence has not been gathered yet |
 | `workflow_translator` | Converting verified findings into skill/plugin/agent/config/process recommendations | Evidence is weak or still disputed |
 
+## Model And Effort Policy
+
+Default project agents should usually pin `model_reasoning_effort` by role and leave `model` unset.
+
+Rationale:
+
+- Codex custom agent files may include `model` and `model_reasoning_effort`, and omitted optional fields inherit from the parent session.
+- OpenAI model recommendations and aliases change over time. Marketplace research workflows should inherit the user's current best/default model unless an eval-proven lane needs a specific model.
+- Reasoning effort is part of the role contract and changes less often than model IDs. It is reasonable to fix effort for repeatability.
+
+Recommended defaults:
+
+| Agent | Model | Effort | Reason |
+| --- | --- | --- | --- |
+| `research_head` | inherit | `high` | coordination, claim ledger, quality gate, and report-outline decisions need deeper reasoning |
+| `paper_scout` | inherit | `medium` | bounded scholarly retrieval lanes need accuracy but should stay cost-aware |
+| `official_guidance_scout` | inherit | `medium` | official-doc checks are source-bound and usually narrower |
+| `source_evaluator` | inherit | `high` | adversarial support checks and contradiction review need deeper reasoning |
+| `workflow_translator` | inherit | `high` | maps evidence into reversible workflow changes with cost, risk, validation, and rollback |
+
+Do not set `xhigh` as a default unless the parent workflow explicitly prioritizes maximum quality over cost and the active model is known to support it. Prefer raising the parent session effort for one hard run over baking `xhigh` into marketplace agent files.
+
+Pin a concrete `model` only when all are true:
+
+- a regression or eval shows a specific model materially improves the lane
+- the expected users accept the cost and availability constraints
+- the agent file or release notes state why the model is pinned
+- there is a rollback condition for stale model behavior, pricing, or availability
+
 ## Activation Rule
 
 Use agent orchestration only when the work is broad enough to need it:

@@ -86,13 +86,13 @@ Use explicit stages so failures can roll back to the right place:
 1. `plan`: restate the objective, classify the mode, set scope, exclusions, time window, and success criteria.
 2. `lane-select`: define the evidence lanes needed by the question, each with source preferences and reader-sufficiency targets from `references/report-substance-standards.md`.
 3. `retrieve`: retrieve candidates from official free sources, Exa free-tier discovery, GitHub, scholarly indexes, and web search as appropriate.
-4. `source-fetch`: fetch or inspect original sources for all claims that affect the conclusion. Do not stop at search snippets, provider summaries, or bibliographic guesses.
-5. `claim-ground`: build a compact claim ledger; each major claim needs source, support label, grounding, limitation, and applicability. For scholarly claims, verify that cited papers or DOIs exist before relying on them.
+4. `source-fetch`: fetch or inspect original sources for all claims that affect the conclusion. Do not stop at search snippets, provider summaries, or bibliographic guesses. For `literature-scan`, `comparison`, `workflow-update-review`, and `deep-research`, create an internal claim-source ledger for major claims using `assets/claim-source-ledger-template.md` when available.
+5. `claim-ground`: build a compact claim ledger; each major claim needs source, canonical URL, access path, support label, grounding, fit judgement, limitation, and applicability. For scholarly claims, verify that cited papers or DOIs exist before relying on them.
 6. `contradiction-check`: search for contradictions, failed replication, benchmark caveats, later updates, or scope conflicts.
 7. `synthesize`: combine evidence into conclusions, not source-by-source summaries.
 8. `workflow-integrate`: if workflow changes are requested, map findings to skill, plugin, MCP, AGENTS.md, custom agent, hook, automation, config, or no change.
 9. `report-write`: write the reader-facing Markdown report unless the user explicitly asks for chat-only output.
-10. `validate`: run quality gates and static report checks. If a hard fail occurs, roll back only to the named failed stage and make a bounded correction pass.
+10. `validate`: run quality gates and static report checks. For report artifacts, run `scripts/lint_report.py` and `scripts/verify_sources.py --offline` when available; use network source verification only when the task needs it and budget/network policy allows it. If a hard fail occurs, roll back only to the named failed stage and make a bounded correction pass.
 
 Do not route every failure back to `retrieve`. A weak conclusion usually needs `synthesize`; missing rollback/validation details need `workflow-integrate`; internal tables in the report need `report-write`.
 
@@ -113,6 +113,17 @@ At the end of a research task, create a Markdown report file.
 - Keep the chat response short: core conclusion, confidence, report path, and one recommended next action.
 - Do not write a report for tiny `quick-fact` answers unless the user asked for a saved artifact.
 - If no workspace write access is available, return the report in chat and state that the file could not be written.
+
+## Local Validation Scripts
+
+Use these deterministic checks when the relevant local files exist:
+
+- `scripts/lint_report.py <report.md>`: checks required reader-facing sections, blocks internal workbench headings, and verifies workflow-update reports mention validation and rollback.
+- `scripts/lint_claim_source_ledger.py <ledger.md>`: checks that internal claim-source ledgers include claim, reference, canonical URL, source tier, access path, grounding, support label, fit judgement, and limitations for each major claim.
+- `scripts/verify_sources.py <report.md> --offline --json <out.json>`: extracts URL, DOI, arXiv, OpenReview, and PubMed references without network calls.
+- `scripts/verify_sources.py <report.md> --json <out.json>`: performs bounded source checks for URLs and supported scholarly identifiers. Use this only when network access is appropriate for the task.
+
+These scripts are safety checks, not substitutes for synthesis. Passing them does not prove that every cited claim is supported; failing them identifies issues that must be corrected or explicitly downgraded before a confident report.
 
 ## Subagents
 

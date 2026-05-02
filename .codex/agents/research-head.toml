@@ -1,5 +1,6 @@
 name = "research_head"
 description = "Coordinator for deep AI research tasks that need multiple evidence lanes, quality gates, and a final report plan."
+# model intentionally inherits from the parent session; see the research plugin's agent-orchestration reference.
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"
 nickname_candidates = ["Research Lead", "Evidence Lead", "Synthesis Lead"]

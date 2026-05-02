@@ -57,3 +57,16 @@ Use `assets/research-report-template.md` as the default artifact shape:
 - Listing many sources without explaining what they change.
 - Hiding uncertainty because the report has a polished structure.
 - Using broad AI research claims without tying them back to the user's workflow.
+
+## Static Validation
+
+Before finalizing a saved report, run `scripts/lint_report.py` when available. It catches structural failures only:
+
+- missing required reader-facing sections
+- internal workbench headings exposed in the report
+- missing source URLs under `참고 출처`
+- workflow-update reports that omit validation or rollback language
+
+Do not treat a clean lint result as proof of source support. Pair it with source extraction or verification from `scripts/verify_sources.py` and a human synthesis pass against the quality gates.
+
+For report-producing modes that use an internal claim-source ledger, run `scripts/lint_claim_source_ledger.py <ledger.md>` when the ledger is saved as an artifact. Keep the ledger out of the final report unless the user asks for audit detail.

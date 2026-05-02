@@ -8,9 +8,12 @@ For each important claim, record:
 
 - exact claim
 - source and date
+- canonical URL
 - source tier
+- access path: full text, abstract, metadata, official doc, code, changelog, table, figure, API response, repository, benchmark, or not checked
 - evidence type
 - grounding quote or exact snippet when available
+- fit judgement: why this source is appropriate support for this claim
 - benchmark/task/data involved
 - limitation or scope boundary
 - whether it changes the workflow recommendation
@@ -23,6 +26,18 @@ For each important claim, record:
 - `contradicted`: credible evidence points the other way
 - `unverified`: only secondary or weak evidence found
 - `retracted`: initially considered but removed because no supporting source or quote was found
+
+## Claim-Source Ledger
+
+For `literature-scan`, `comparison`, `workflow-update-review`, and `deep-research`, keep an internal claim-source ledger for major claims. The ledger should connect:
+
+```text
+claim -> reference -> canonical URL -> access path -> grounding -> support label -> fit judgement -> limitations
+```
+
+Use `assets/claim-source-ledger-template.md` when available. Validate it with `scripts/lint_claim_source_ledger.py` when a ledger artifact is written.
+
+Do not expose the full ledger in the reader-facing report unless the user explicitly asks for an audit appendix.
 
 ## Quote-First Grounding
 

@@ -32,12 +32,13 @@ Official Codex concepts map cleanly to this split:
 
 1. Retrieval is evidence discovery, not evidence validation.
 2. A source is not final support until its original page, paper, repository, API response, or metadata has been fetched or inspected.
-3. Citations must support the attached claim, not merely the surrounding topic.
-4. For scholarly work, verify bibliographic existence when the citation affects a conclusion: DOI, title, venue, authors, year, or canonical index page.
-5. Prefer source-specific grounding snippets or metadata fields for high-impact claims.
-6. Use contradiction searches for broad, current, benchmark, or workflow-changing conclusions.
-7. Keep source-quality judgment in skills/references; keep provider setup in MCP config.
-8. Use subagents only for independent lanes with bounded outputs: sources, gaps, and decision impact.
+3. Major claims should be traceable through a claim-source ledger: claim -> reference -> canonical URL -> access path -> grounding -> support label -> fit judgement.
+4. Citations must support the attached claim, not merely the surrounding topic.
+5. For scholarly work, verify bibliographic existence when the citation affects a conclusion: DOI, title, venue, authors, year, or canonical index page.
+6. Prefer source-specific grounding snippets or metadata fields for high-impact claims.
+7. Use contradiction searches for broad, current, benchmark, or workflow-changing conclusions.
+8. Keep source-quality judgment in skills/references; keep provider setup in MCP config.
+9. Use subagents only for independent lanes with bounded outputs: sources, gaps, and decision impact.
 
 ## When To Escalate Verification
 
@@ -52,8 +53,8 @@ Escalate from ordinary source checks to citation/source verification when:
 
 ## Workflow Implications
 
-- `source-fetch` should fetch original documents, not just result snippets.
-- `claim-ground` should decompose major conclusions into checkable claims.
+- `source-fetch` should fetch original documents, not just result snippets, and record the access path used for major claims.
+- `claim-ground` should decompose major conclusions into checkable claims and keep an internal claim-source ledger for report-producing modes.
 - `contradiction-check` should look for newer versions, retractions, failed replications, benchmark caveats, and domain-specific limitations.
 - `validate` should include static report checks and, when available, deterministic citation/source checks.
 - `workflow-integrate` should state target surface, cost, validation signal, and rollback condition for any plugin or skill change.
