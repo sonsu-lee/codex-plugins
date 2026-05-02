@@ -1,8 +1,7 @@
 {
   "name": "sonsu-personal",
   "interface": {
-    "displayName": "Sonsu Personal Plugins",
-    "description": "Personal Codex plugins, skills, and workflows used by sonsu."
+    "displayName": "Sonsu Personal Plugins"
   },
   "plugins": [
     {

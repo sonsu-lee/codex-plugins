@@ -5,8 +5,8 @@
   "author": {
     "name": "sonsu"
   },
-  "homepage": "file:///Users/sonsu/Documents/New%20project/plugins/research",
-  "repository": "file:///Users/sonsu/Documents/New%20project",
+  "homepage": "https://github.com/sonsu-lee/codex-plugins/tree/main/plugins/research",
+  "repository": "https://github.com/sonsu-lee/codex-plugins",
   "license": "UNLICENSED",
   "keywords": [
     "research",
@@ -29,7 +29,7 @@
       "Read",
       "Write"
     ],
-    "websiteURL": "file:///Users/sonsu/Documents/New%20project/plugins/research",
+    "websiteURL": "https://github.com/sonsu-lee/codex-plugins/tree/main/plugins/research",
     "privacyPolicyURL": "https://openai.com/policies/row-privacy-policy/",
     "termsOfServiceURL": "https://openai.com/policies/row-terms-of-use/",
     "defaultPrompt": [
