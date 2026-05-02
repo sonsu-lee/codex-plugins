@@ -1,0 +1,41 @@
+{
+  "name": "commit-rules",
+  "version": "0.1.0",
+  "description": "Personal commit policy for coherent commit scope, Conventional Commits, and pre-commit verification.",
+  "author": {
+    "name": "sonsu"
+  },
+  "homepage": "file:///Users/sonsu/Documents/New%20project/plugins/commit-rules",
+  "repository": "file:///Users/sonsu/Documents/New%20project",
+  "license": "UNLICENSED",
+  "keywords": [
+    "git",
+    "commit",
+    "conventional-commits",
+    "verification",
+    "workflow"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Commit Rules",
+    "shortDescription": "Personal Git commit rules for scope, message format, and verification.",
+    "longDescription": "A lightweight personal workflow overlay for Codex commit creation. It keeps commits limited to one coherent change, requires Conventional Commit messages, and blocks commits when relevant lint, build, test, or type-check verification has not passed. It intentionally does not own push, pull request creation, branch cleanup, release workflow, or CI debugging.",
+    "developerName": "sonsu",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "file:///Users/sonsu/Documents/New%20project/plugins/commit-rules",
+    "privacyPolicyURL": "https://openai.com/policies/row-privacy-policy/",
+    "termsOfServiceURL": "https://openai.com/policies/row-terms-of-use/",
+    "defaultPrompt": [
+      "Split my changes into clean commits.",
+      "Commit this with Conventional Commits.",
+      "Check whether this is ready to commit."
+    ],
+    "brandColor": "#334155",
+    "screenshots": []
+  }
+}
