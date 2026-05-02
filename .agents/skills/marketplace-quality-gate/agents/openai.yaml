@@ -1,0 +1,4 @@
+interface:
+  display_name: "Marketplace Quality Gate"
+  short_description: "Marketplace quality and orchestration gate for personal Codex plugins"
+  default_prompt: "Check this marketplace for plugin artifact issues, role overlap, trigger collisions, and orchestration gaps."
